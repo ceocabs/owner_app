@@ -1,0 +1,258 @@
+name: owner
+description: A new Flutter project.
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  form_field_validator: ^1.1.0
+  flutter_screenutil: ^5.7.0
+  another_flushbar: ^1.12.29
+  get_it: ^7.2.0
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+  path_provider: ^2.0.2
+  json_serializable: ^4.1.3
+  dio: ^4.0.0
+  dio_http_cache:
+    git:
+      url: https://github.com/hurshi/dio-http-cache.git
+  record_mp3: ^3.0.0
+  pretty_dio_logger: ^1.2.0-beta-1
+  connectivity: ^3.0.6
+  encrypt: ^5.0.0
+  crypto: ^3.0.1
+  mobx: ^2.0.1
+  flutter_mobx: ^2.0.0
+  cached_network_image: ^3.0.0
+
+
+  country_pickers: ^2.0.0
+  google_fonts: 2.2.0
+  image_picker: ^0.8.0+1
+  webview_flutter: ^2.0.8
+  pin_code_fields: ^7.3.0
+  flutter_native_splash: ^2.0.1+1
+  smooth_page_indicator: ^1.0.0+2
+  timer_count_down: ^2.2.1
+  country_code_picker: ^3.0.0
+  location: ^4.3.0
+  geocode: ^1.0.1
+  google_maps_flutter: ^2.1.1
+  flutter_polyline_points: ^1.0.0
+  geolocator: ^7.7.1
+  geocoding: ^2.0.2
+  getwidget: ^3.0.1
+  custom_pop_up_menu: ^1.2.3+1
+  get: ^4.6.5
+  flutter_local_notifications: ^9.5.1
+  firebase_messaging: ^14.4.0
+  firebase_core: ^2.7.0
+  permission_handler: ^10.0.0
+  clippy_flutter: ^1.1.1
+  proste_bezier_curve: ^2.0.2
+  flutter_timer_countdown: ^1.0.5
+  grouped_list: ^5.1.2
+  youtube_player_flutter: ^8.1.2
+  youtube: ^1.0.1
+  carousel_slider: ^4.2.1
+  carousel_indicator: ^1.0.6
+  flutter_rating_bar: ^4.0.1
+  custom_rating_bar: ^2.0.5
+  dotted_border: ^2.0.0+3
+  google_sign_in: ^6.1.0
+  firebase_auth: ^4.4.0
+  device_info_plus: ^8.1.0
+  sign_in_with_apple: ^4.3.0
+  dio_logger: ^4.0.8+8
+  connectivity_plus: ^3.0.3
+  internet_connection_checker: ^1.0.0+1
+  mime: ^1.0.4
+  shared_preferences: ^2.1.0
+  flutter_svg: ^2.0.4
+  firebase_remote_config: ^4.0.0
+  flutter_animated_progress: ^1.2.0
+  linear_timer: ^1.0.0
+  flutter_expanded_tile: ^0.3.7
+  http: ^0.13.5
+  awesome_dialog: ^3.0.2
+  simple_ripple_animation: ^0.0.7
+  url_launcher: ^6.1.10
+
+
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.1.7
+  mobx_codegen:
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
+  modal_bottom_sheet:
+    git:
+      url: https://github.com/followthemoney1/modal_bottom_sheet.git
+      ref: main
+      path: modal_bottom_sheet
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/logo.png
+    - assets/images/google.png
+    - assets/images/apple.png
+    - assets/images/left_arrow.png
+    - assets/images/track_vehicle.png
+    - assets/images/driver_list.png
+    - assets/images/total_earning.png
+    - assets/images/vehicle_details.png
+    - assets/images/bank_details.png
+    - assets/images/withdraw_history.png
+    - assets/images/girl.png
+    - assets/images/boy.png
+    - assets/images/car.png
+    - assets/images/my_profile.png
+    - assets/images/car1.png
+    - assets/images/top_up.png
+    - assets/images/protocol.png
+    - assets/images/points.png
+    - assets/images/coupon.png
+    - assets/images/advatice.png
+    - assets/images/home_background.png
+    - assets/images/car_booking.png
+    - assets/images/parcel_booking.png
+    - assets/images/account_successfully.jpg
+    - assets/images/outstation_booking.png
+    - assets/images/rental_booking.png
+    - assets/images/welcome_sub_image.png
+    - assets/images/tick-circle.png
+    - assets/images/ceo_logo.png
+    - assets/images/greybg.png
+    - assets/images/add.png
+    - assets/images/privacy.png
+    - assets/images/terms_and_conditions.png
+    - assets/images/logout.png
+    - assets/images/management.png
+    - assets/images/up_arrow.png
+    - assets/images/user.png
+    - assets/images/mini_booking.png
+    - assets/images/calling.png
+    - assets/images/rate_driver.png
+    - assets/images/taxi.png
+    - assets/images/sudan_car.png
+    - assets/images/doller_shape.png
+    - assets/images/instagram.png
+    - assets/images/location_tick.png
+    - assets/images/close-circle.png
+    - assets/images/thumb_icon.png
+    - assets/images/rectangle.png
+    - assets/images/youtube.png
+    - assets/images/minus.png
+    - assets/images/connected.jpg
+    - assets/images/coins.png
+    - assets/images/twitter.png
+    - assets/images/send.png
+    - assets/images/MaleDisabled.png
+    - assets/images/FemaleEnabled.png
+    - assets/images/facebook.png
+    - assets/images/linkedin.png
+    - assets/images/tracking_car.png
+    - assets/images/transaction_history.png
+    - assets/images/blur_background.png
+    - assets/images/complaint_front_image.jpg
+    - assets/images/vehicle_register.jpg
+    - assets/images/upload_image.png
+    - assets/images/destination_pin.png
+    - assets/images/earning_ad.jpg
+    - assets/images/bill_flow.jpg
+    - assets/images/close_circle.png
+    - assets/images/current_location_pin.png
+    - assets/images/pending_approval.png
+    - assets/images/apply_coupon.png
+    - assets/fonts/BebasNeue-Light.ttf
+    - assets/fonts/BebasNeue-Regular.ttf
+    - assets/fonts/BebasNeue-Bold.ttf
+
+
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  fonts:
+    - family: Bebas Neue
+      fonts:
+        - asset: assets/fonts/BebasNeue-Light.ttf
+          weight: 300
+        - asset: assets/fonts/BebasNeue-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/BebasNeue-Bold.ttf
+          weight: 700
+
+
+
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
