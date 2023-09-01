@@ -16,7 +16,7 @@ String baseURL() {
 
     case ProjectEnvironment.production:
       apiPlatForm = "production";
-      return "http://13.126.160.153:8005/";
+      return "http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/";
     //    return "http://13.233.70.250/public/api/";
   }
 }
@@ -58,7 +58,10 @@ enum ServiceApi {
   searchDriver,
   verifyDriverOTP,
   assignDriverToOwner,
-  ownrDriverList
+  ownrDriverList,
+  getOwnerInfoNew,
+  onlineOfflineOwnerDrivers,
+  ownerBankDetailsById
 }
 
 extension ServiceExtension on ServiceApi {
@@ -153,10 +156,11 @@ extension ServiceExtension on ServiceApi {
       case ServiceApi.getOwnerByStatus:
         return "get-owner-by-status";
 
+      case ServiceApi.ownerBankDetailsById:
+        return "owner-bank-details-by-id";
 
       case ServiceApi.assignVehicle:
         return "public/api/assignvehicle";
-
 
       case ServiceApi.editOwnerDocuments:
         return "edit-owner-documents";
@@ -167,10 +171,8 @@ extension ServiceExtension on ServiceApi {
       case ServiceApi.searchDriver:
         return "public/api/search-driver-mobile-send-otp";
 
-
       case ServiceApi.verifyDriverOTP:
         return "public/api/search-driver-mobile-verify-otp";
-
 
       case ServiceApi.assignDriverToOwner:
         return "public/api/assigndriver";
@@ -178,6 +180,12 @@ extension ServiceExtension on ServiceApi {
       case ServiceApi.ownrDriverList:
         return "owner-drivers-list";
 
+      case ServiceApi.getOwnerInfoNew:
+        return "public/api/getownerinfonew";
+
+
+      case ServiceApi.onlineOfflineOwnerDrivers:
+        return "online-offline-owner-drivers";
     }
   }
 

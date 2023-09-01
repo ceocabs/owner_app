@@ -128,6 +128,7 @@ class _SplashState extends State<Splash> {
 
       userId = loginDataBase.get("userId");
       token = loginDataBase.get("token");
+      print(token.toString() + " token..........");
       print("$userId userId........");
       checkDataApproval(customersId: int.parse(userId), context: context);
       print("user is login....");

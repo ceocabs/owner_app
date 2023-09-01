@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: AppColor.darkBlue,
           ),
           onReady: () {},
-          initialRoute: RouteName.menuOptionScreen,
+          initialRoute: RouteName.root,
           navigatorKey: NavigationService.navigatorKey,
           routes: Routes.route(),
           onGenerateRoute: Routes.onGenerateRoute,

@@ -114,7 +114,7 @@ class _UploadRejectedDocumentPageState
         String? folderName,
         int? index}) async {
     var req = http.MultipartRequest('POST',
-        Uri.parse("http://13.126.160.153:8005/public/api/upload-image"));
+        Uri.parse("http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
     final headers = {
       'Content-Type': 'application/json',
     };

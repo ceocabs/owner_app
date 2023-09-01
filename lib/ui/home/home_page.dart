@@ -3,9 +3,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:owner/ui/auth/model/brand_model.dart';
 import 'package:owner/ui/auth/model/color_model.dart';
+import 'package:owner/ui/auth/model/owner_profile_model.dart';
 import 'package:owner/ui/auth/response/get_color_response.dart';
 import 'package:owner/ui/auth/model/vehhicle_details_model.dart';
 import 'package:owner/values/extensions/double_ext.dart';
@@ -16,12 +18,16 @@ import '../../core/navigation/routes.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
 import '../../values/style.dart';
+import '../../widgets/loading_widget.dart';
 import '../auth/login_screen.dart';
 import '../auth/response/get_brand_response.dart';
+import '../auth/response/owner_profile_response.dart';
 import '../auth/response/user_info_response.dart';
+import '../auth/viewModel/owner_profile_viewModel.dart';
 import '../auth/viewModel/user_info_viewModel.dart';
 import '../auth/response/vehicle_details_response.dart';
 import '../auth/viewModel/vehicle_details_viewModel.dart';
+import 'package:location/location.dart' as loc;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +37,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late LatLng currentClientOrderLatLong = const LatLng(21.4858, 39.1925);
+  late LatLng currentClientOrderLatLong = const LatLng(19.0760, 72.8777);
   late LatLng latLong1 = const LatLng(21.48583611, 39.1925852100);
   late LatLng latLong2 = const LatLng(21.485820131, 39.19353010);
   late LatLng latLong3 = const LatLng(21.5858554, 39.1825967854);
@@ -50,6 +56,30 @@ class _HomePageState extends State<HomePage> {
   bool isOnline = true;
   bool isInfoWindow = false;
 
+  Future<Position> _getGeoLocationPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return Future.error('Location services are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.',
+      );
+    }
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
   Future<Uint8List> getBytesFromAsset(
     String path,
   ) async {
@@ -63,10 +93,20 @@ class _HomePageState extends State<HomePage> {
         .asUint8List();
   }
 
+  bool isLoading = false;
+
   @override
   Future<void> didChangeDependencies() async {
+    setState(() {
+      isLoading = true;
+    });
+    Position position = await _getGeoLocationPosition();
+    await getCurrentLocation(context);
     await getUserInfo(context: context, userId: userId);
-
+    await getOwnerInfo(context: context, userId: userId);
+    setState(() {
+      isLoading = false;
+    });
     await getBrand(
       context: context,
     );
@@ -75,6 +115,22 @@ class _HomePageState extends State<HomePage> {
     //  await getVehicleType(context: context);
     addMarkers();
     setState(() {});
+  }
+
+  loc.Location _locationTracker = loc.Location();
+
+  getCurrentLocation(BuildContext context) {
+    _locationTracker.onLocationChanged.listen(
+      (newLocalData) async {
+        currentClientOrderLatLong =
+            LatLng(newLocalData.latitude!, newLocalData.longitude!);
+        latitude = newLocalData.latitude.toString();
+        longnitude = newLocalData.longitude.toString();
+        // await getAddressOnTap(currentClientOrderLatLong);
+      },
+    );
+    print(currentClientOrderLatLong.toString() +
+        "  updated location.........controller");
   }
 
   getUserInfo({
@@ -95,7 +151,42 @@ class _HomePageState extends State<HomePage> {
         } else {}
       });
     } catch (e) {
-      print(e.toString() + " e...........");
+      print("$e e...........");
+    }
+  }
+
+  List<OwnerProfileModel> ownerProfileModelList = [];
+
+  getOwnerInfo({
+    required BuildContext context,
+    required String userId,
+  }) async {
+    final apiHandler = ownerProfileViewModel();
+    OwnerProfileRequestModel request = OwnerProfileRequestModel(
+      ownerId: userId,
+    );
+
+    try {
+      await apiHandler
+          .ownerProfile(request: request, context: context)
+          .then((response) {
+        var code = response;
+        ownerProfileModelList =
+            response.map((i) => OwnerProfileModel.fromJson(i)).toList();
+        print("${ownerProfileModelList.length}  length.........");
+
+        name = ownerProfileModelList[0].firstName.toString() +
+            " " +
+            ownerProfileModelList[0].lastName.toString();
+        mobileNo = ownerProfileModelList[0].mobileNo.toString();
+        profileImage = ownerProfileModelList[0].profileImage.toString();
+        email = ownerProfileModelList[0].emailId.toString();
+
+        if (code != null) {
+        } else {}
+      });
+    } catch (e) {
+      print("$e e...........");
     }
   }
 
@@ -110,13 +201,13 @@ class _HomePageState extends State<HomePage> {
           .then((response) {
         var code = response;
         colorModelList = response.map((i) => ColorModel.fromJson(i)).toList();
-        print(colorModelList.length.toString() + "  length.........");
-        print(colorModelList[0].colorName.toString() + " color name");
+        print("${colorModelList.length}  length.........");
+        // print(colorModelList[0].colorName.toString() + " color name");
         if (code != null) {
         } else {}
       });
     } catch (e) {
-      print(e.toString() + " e...........");
+      print("$e e...........");
     }
   }
 
@@ -138,10 +229,10 @@ class _HomePageState extends State<HomePage> {
         vehicleDetailsModelList =
             response.map((i) => VehicleDetailsModel.fromJson(i)).toList();
         print("${vehicleDetailsModelList.length}  length.........");
-        print(
+        /* print(
             "${vehicleDetailsModelList[0].insuranceCompany} insurance company name");
         print(
-            "${vehicleDetailsModelList[1].insuranceCompany} insurance company name");
+            "${vehicleDetailsModelList[1].insuranceCompany} insurance company name");*/
 
         if (code != null) {
         } else {}
@@ -160,14 +251,14 @@ class _HomePageState extends State<HomePage> {
       await apiHandler.getBrand(context: context).then((response) {
         var code = response;
         brandModelList = response.map((i) => BrandModel.fromJson(i)).toList();
-        print(brandModelList.length.toString() + "  length.........");
-        print(brandModelList[0].brandName.toString() + " brand name");
+        print("${brandModelList.length}  length.........");
+        //print(brandModelList[0].brandName.toString() + " brand name");
 
         if (code != null) {
         } else {}
       });
     } catch (e) {
-      print(e.toString() + " e...........");
+      print("$e e...........");
     }
   }
 
@@ -254,38 +345,48 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 40.h,
-              padding: EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-              ),
-              width: MediaQuery.of(context).size.width,
-              color: AppColor.darkBlue,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+      body: isLoading
+          ? const LoadingWidget()
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 40.h,
+                  padding: EdgeInsets.only(
+                    left: 20.w,
+                    right: 20.w,
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  color: AppColor.darkBlue,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 30.w,
-                        height: 30.h,
-                        decoration: const BoxDecoration(
-                          color: AppColor.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.person_outline_outlined),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 30.w,
+                            height: 30.h,
+                            decoration: const BoxDecoration(
+                              color: AppColor.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(Icons.person_outline_outlined),
+                          ),
+                          10.w.HBox,
+                          Text(
+                            "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}",
+                            style: textBold.copyWith(
+                              fontSize: 16.sp,
+                              color: AppColor.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      10.w.HBox,
                       Text(
-                        "John Deo",
+                        "Total Vehicle : ${ownerProfileModelList[0].totalVehicleCount.toString()}",
                         style: textBold.copyWith(
                           fontSize: 16.sp,
                           color: AppColor.white,
@@ -293,109 +394,110 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Text(
-                    "Total Vehicle : 10",
-                    style: textBold.copyWith(
-                      fontSize: 16.sp,
-                      color: AppColor.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 463.h,
-              child: GoogleMap(
-                zoomControlsEnabled: false,
-                myLocationButtonEnabled: true,
-                myLocationEnabled: true,
-                polylines: _polyline,
-                initialCameraPosition: CameraPosition(
-                  target: currentClientOrderLatLong,
-                  zoom: 13,
-                  bearing: 10,
-                  tilt: 10,
                 ),
-                markers: markers,
-                onTap: (position) {},
-                gestureRecognizers: Set()
-                  ..add(
-                    Factory<PanGestureRecognizer>(
-                      () => PanGestureRecognizer(),
+                SizedBox(
+                  height: 463.h,
+                  child: GoogleMap(
+                    zoomControlsEnabled: false,
+                    myLocationButtonEnabled: true,
+                    myLocationEnabled: true,
+                    polylines: _polyline,
+                    initialCameraPosition: CameraPosition(
+                      target: currentClientOrderLatLong,
+                      zoom: 13,
+                      bearing: 10,
+                      tilt: 10,
                     ),
+                    markers: markers,
+                    onTap: (position) {},
+                    gestureRecognizers: Set()
+                      ..add(
+                        Factory<PanGestureRecognizer>(
+                          () => PanGestureRecognizer(),
+                        ),
+                      ),
+                    // onMapCreated: _onMapCreated,
                   ),
-                // onMapCreated: _onMapCreated,
-              ),
+                ),
+                Container(
+                  color: AppColor.white,
+                  padding: EdgeInsets.only(
+                    left: 20.w,
+                    right: 20.w,
+                  ),
+                  height: 60.h,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          navigator.pushNamed(
+                              RouteName.onlineOfflineDriverScreen,
+                              arguments: {"searchingType": "Online"});
+                        },
+                        child: Container(
+                          height: 41.h,
+                          width: 130.w,
+                          decoration: BoxDecoration(
+                            color: AppColor.green,
+                            borderRadius: BorderRadius.circular(10.w),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                StringConstant.onlineDrivers,
+                                style:
+                                    textBold.copyWith(color: AppColor.white),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          navigator.pushNamed(
+                              RouteName.onlineOfflineDriverScreen,
+                              arguments: {"searchingType": "Offline"});
+                        },
+                        child: Container(
+                          height: 41.h,
+                          width: 130.w,
+                          decoration: BoxDecoration(
+                            color: AppColor.red,
+                            borderRadius: BorderRadius.circular(10.w),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                StringConstant.offlineDrivers,
+                                style: textBold.copyWith(
+                                  color: AppColor.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Container(
-              color: AppColor.white,
-              padding: EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-              ),
-              height: 60.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      navigator.pushNamed(RouteName.onlineOfflineDriverScreen);
-                    },
-                    child: Container(
-                      height: 41.h,
-                      width: 130.w,
-                      decoration: BoxDecoration(
-                        color: AppColor.green,
-                        borderRadius: BorderRadius.circular(10.w),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            StringConstant.onlineDrivers,
-                            style: textBold.copyWith(color: AppColor.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      navigator.pushNamed(RouteName.onlineOfflineDriverScreen);
-                    },
-                    child: Container(
-                      height: 41.h,
-                      width: 130.w,
-                      decoration: BoxDecoration(
-                        color: AppColor.red,
-                        borderRadius: BorderRadius.circular(10.w),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            StringConstant.offlineDrivers,
-                            style: textBold.copyWith(
-                              color: AppColor.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 }
 
+String name = "";
+String mobileNo = "";
+String profileImage = "";
+String email = "";
+String latitude = "";
+String longnitude = "";
 /*  getVehicleType({
     required BuildContext context,
   }) async {

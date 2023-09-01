@@ -7,6 +7,10 @@ class StringConstant {
   static const String pucTitle = 'PUC';
   static const String success = 'Success';
   static const String connect = 'Connect';
+  static const String profile = 'Profile';
+  static const String call = 'Call';
+  static const String dataNotFound = 'Data Not Found';
+  static const String onlineOfflineDrivers = 'Online - Offline Drivers';
   static const String alreadyAssignVehicle = 'Already Assign Vehicle';
   static const String assignNewVehicle =  'Assign new vehicle';
   static const String repliedOn = 'Replied On :';
@@ -144,6 +148,7 @@ class StringConstant {
   static const String viewInvoice = 'View Invoice';
   static const String addDriver = 'Add Driver';
   static const String addVehicle = 'Add Vehicle';
+  static const String assignVehicle = 'Assign Vehicle';
   static const String referNow = 'Refer now';
   static const String tripRating = 'Trip Rating';
   static const String feedBack = 'Feed Back';
@@ -160,12 +165,10 @@ class StringConstant {
   static const String dateAndTime = 'Date & Time';
   static const String relatedIssue = 'Related Issue';
   static const String complaint = 'Complaint';
-  static const String dataNotFound = 'Data Not Found';
+
   static const String complaintMessage = 'Complaint Message ';
   static const String totalLoginHr = 'Total Login Hr:';
-
   static const String documentsUnderReview = 'Your Vehicle Document Under Review, Please Wait For Admin Approval';
-
   static const String firstName = 'First Name';
   static const String lastName = 'Last Name';
   static const String linkedMobileNumber = 'Bank linked mobile number';
@@ -195,7 +198,7 @@ class StringConstant {
   static const String profileDetail = 'Profile Detail';
   static const String enterYourName = 'Enter Your Name';
   static const String registration = 'Registration';
-  static const String assignVehicle = 'Assign Vehicle';
+
   static const String outStationBooking = 'OutStation Booking';
   static const String covid19Protocol = 'Covid 19 Protocol';
   static const String message = 'Message';

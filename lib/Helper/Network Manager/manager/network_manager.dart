@@ -122,7 +122,7 @@ class NetworkManager {
     /// Create non-auth header
     final headers = {
       'Content-Type': 'application/json',
-      'token':token
+      'Authorization':token
     };
 
     /// Add bearer token, if the APIcall is to be authenticated

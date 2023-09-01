@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -55,6 +55,7 @@ dependencies:
   mobx: ^2.0.1
   flutter_mobx: ^2.0.0
   cached_network_image: ^3.0.0
+  flutter_phone_direct_caller: ^2.1.1
 
 
   country_pickers: ^2.0.0
@@ -79,7 +80,7 @@ dependencies:
   firebase_messaging: ^14.4.0
   firebase_core: ^2.7.0
   permission_handler: ^10.0.0
-  clippy_flutter: ^1.1.1
+  clippy_flutter: ^2.0.0-nullsafety.1
   proste_bezier_curve: ^2.0.2
   flutter_timer_countdown: ^1.0.5
   grouped_list: ^5.1.2
@@ -108,7 +109,7 @@ dependencies:
   awesome_dialog: ^3.0.2
   simple_ripple_animation: ^0.0.7
   url_launcher: ^6.1.10
-
+  sms_autofill: ^2.3.0
 
 
 
@@ -165,6 +166,7 @@ flutter:
     - assets/images/points.png
     - assets/images/coupon.png
     - assets/images/advatice.png
+    - assets/images/whatsapp_image.png
     - assets/images/home_background.png
     - assets/images/car_booking.png
     - assets/images/parcel_booking.png

@@ -10,6 +10,7 @@ class Res {
   static const String myProfile = "assets/images/my_profile.png";
   static const String driverList = "assets/images/driver_list.png";
   static const String billFlow = "assets/images/bill_flow.jpg";
+  static const String whatsAppImage = "assets/images/whatsapp_image.png";
   static const String trackVehicle = "assets/images/track_vehicle.png";
   static const String vehicleDetails = "assets/images/vehicle_details.png";
   static const String bankDetails = "assets/images/bank_details.png";
@@ -29,6 +30,7 @@ class Res {
   static const String topUp = "assets/images/top_up.png";
   static const String sideBorder = "assets/images/side_border.png";
   static const String car1 = "assets/images/car1.png";
+  static const String ceoLogo = "assets/images/ceo_logo.png";
   static const String uploadImage = "assets/images/upload_image.png";
 
   static const String bringme_info_header =

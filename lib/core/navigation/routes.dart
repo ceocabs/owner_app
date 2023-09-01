@@ -30,6 +30,7 @@ import '../../ui/driver_info/driver_documents_image_page.dart';
 import '../../ui/driver_otp_verification_page.dart';
 import '../../ui/home/add_driver_page.dart';
 import '../../ui/home/assign_vehicle_page.dart';
+import '../../ui/home/choose _specifc_driver_screen.dart';
 import '../../ui/home/complaint_history_details_page.dart';
 import '../../ui/home/driver_confirmation_page.dart';
 import '../../ui/home/driver_earning_details_page.dart';
@@ -37,6 +38,8 @@ import '../../ui/home/earning_filter_data_page.dart';
 import '../../ui/home/login_history_details.dart';
 import '../../ui/home/message_screen.dart';
 import '../../ui/home/online_offline_driver_screen.dart';
+import '../../ui/home/owner_bank_details_page.dart';
+import '../../ui/home/owner_profile_page.dart';
 import '../../ui/home/successfully_connected_screen.dart';
 import '../../ui/home/update_vehicle_docuemts_page.dart';
 import '../../ui/home/upload_rejected_document_page.dart';
@@ -60,9 +63,12 @@ abstract class RouteName {
   static const String ownerDriverList = "ownerDriverList";
   static const String vehicleStatusPage = "VehicleStatusPage";
   static const String addDriverPage = "addDriverPage";
+  static const String ChooseSpecifcDriverScreen = "ChooseSpecifcDriverScreen";
   static const String vehicleInfoFirstPage = "vehicleInfoFirstPage";
   static const String vehicleInfoSecondPage = "vehicleInfoSecondPage";
   static const String searchDriverPage = "searchDriverPage";
+  static const String ownerProfilePage = "ownerProfilePage";
+  static const String ownerBankDetails = "OwnerBankDetails";
   static const String vehicleRegistrationDemoPage = "vehicleRegistrationDemoPage";
   static const String vehicleRegisterSuccess = "vehicleRegisterSuccess";
   static const String successfullyConnectedScreen =
@@ -164,6 +170,10 @@ class Routes {
         page = const MenuOptionsScreen();
         break;
 
+      case RouteName.ownerBankDetails:
+        page = const OwnerBankDetails();
+        break;
+
       case RouteName.driverListScreen:
         page = const DriverListScreen();
         break;
@@ -174,6 +184,11 @@ class Routes {
 
       case RouteName.searchDriverPage:
         page = const SearchDriverPage();
+        break;
+
+
+      case RouteName.ownerProfilePage:
+        page = const OwnerProfilePage();
         break;
 
       case RouteName.loginHistoryPage:
@@ -191,6 +206,11 @@ class Routes {
 
       case RouteName.earningFilterDataPage:
         page = const EarningFilterDataPage();
+        break;
+
+
+      case RouteName.ChooseSpecifcDriverScreen:
+        page = const ChooseSpecifcDriverScreen();
         break;
 
 

@@ -1,20 +1,20 @@
-class CheckDocumentRequestModel {
-  late int? userId;
+class OwnerProfileRequestModel {
+  late dynamic ownerId;
 
-  CheckDocumentRequestModel({
-    required this.userId,
+  OwnerProfileRequestModel({
+    required this.ownerId,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'id': userId,
+      'id': ownerId,
     };
   }
 }
 
 
-class CheckDocumentResponseModel {
-  CheckDocumentResponseModel({
+class OwnerProfileResponseModel {
+  OwnerProfileResponseModel({
     this.success,
     this.message,
     this.data,
@@ -24,8 +24,8 @@ class CheckDocumentResponseModel {
   dynamic message;
   dynamic data;
 
-  factory CheckDocumentResponseModel.fromJson(Map<String, dynamic> json) =>
-      CheckDocumentResponseModel(
+  factory OwnerProfileResponseModel.fromJson(Map<String, dynamic> json) =>
+      OwnerProfileResponseModel(
         success: json["success"] == null ? null : json["success"],
         message: json["message"] == null ? null : json["message"],
         data: json["data"] == null ? null : json["data"],

@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:owner/ui/auth/response/logout_response.dart';
 import 'package:owner/ui/auth/viewModel/logout_viewModel.dart';
 import 'package:owner/ui/auth/otp_verification_page.dart';
+import 'package:owner/ui/home/home_page.dart';
 import 'package:owner/values/extensions/double_ext.dart';
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
@@ -12,6 +13,9 @@ import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
 import '../auth/login_screen.dart';
+import '../auth/model/owner_profile_model.dart';
+import '../auth/response/owner_profile_response.dart';
+import '../auth/viewModel/owner_profile_viewModel.dart';
 
 class MenuOptionsScreen extends StatefulWidget {
   const MenuOptionsScreen({Key? key}) : super(key: key);
@@ -50,6 +54,39 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     }
   }
 
+  List<OwnerProfileModel> ownerProfileModelList = [];
+
+  getOwnerInfo({
+    required BuildContext context,
+    required String userId,
+  }) async {
+    final apiHandler = ownerProfileViewModel();
+    OwnerProfileRequestModel request = OwnerProfileRequestModel(
+      ownerId: userId,
+    );
+
+    try {
+      await apiHandler
+          .ownerProfile(request: request, context: context)
+          .then((response) {
+        var code = response;
+        ownerProfileModelList =
+            response.map((i) => OwnerProfileModel.fromJson(i)).toList();
+        print("${ownerProfileModelList.length}  length.........");
+        name = ownerProfileModelList[0].firstName.toString() +
+            " " +
+            ownerProfileModelList[0].lastName.toString();
+        mobileNo = ownerProfileModelList[0].mobileNo.toString();
+        profileImage = ownerProfileModelList[0].profileImage.toString();
+        email = ownerProfileModelList[0].emailId.toString();
+        if (code != null) {
+        } else {}
+      });
+    } catch (e) {
+      print("$e e...........");
+    }
+  }
+
   List<String> imageList = [
     Res.myProfile,
     Res.trackVehicle,
@@ -80,9 +117,16 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     StringConstant.logout,
   ];
 
+  @override
+  Future<void> didChangeDependencies() async {
+    await getOwnerInfo(context: context, userId: userId);
+
+    super.didChangeDependencies();
+  }
+
   Future<void> navigationFun(int index) async {
     if (index == 0) {
-      navigator.pushNamedAndRemoveUntil(RouteName.homePage);
+      navigator.pushNamed(RouteName.ownerProfilePage);
     } else if (index == 1) {
     } else if (index == 2) {
       navigator.pushNamed(RouteName.ownerDriverList);
@@ -162,12 +206,29 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                     children: [
                       Container(
                         width: 70.w,
-                        height: 70.h,
+                        height: 60.h,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: AppColor.accentColor,
                         ),
-                        child: Image.asset(Res.user),
+                        child:  ClipRRect(
+                          borderRadius: BorderRadius.circular(50.w),
+                          child: Image.network(
+                            profileImage,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Image.asset(
+                                "assets/images/user.png",
+                                width: 70.w,
+                                height: 70.h,
+                                fit: BoxFit.contain,
+                              );
+                            },
+                            width: 150.w,
+                            height: 120.h,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
                       20.w.HBox,
                       Column(
@@ -175,18 +236,18 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Amol Patil",
+                            name,
                             style: textBold.copyWith(
                                 fontSize: 18.sp, color: AppColor.darkBlue),
                           ),
                           //5.h.VBox,
                           Text(
-                            "₹ 5550.00",
+                            mobileNo,
                             style: textBold.copyWith(
                                 fontSize: 14.sp, color: AppColor.dark),
                           ),
                           Text(
-                            "Sudan GJ01 MW 1888",
+                            email,
                             style: textBold.copyWith(
                                 fontSize: 14.sp, color: AppColor.dark),
                           ),

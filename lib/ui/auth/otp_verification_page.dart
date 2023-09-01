@@ -13,6 +13,7 @@ import 'package:owner/values/extensions/double_ext.dart';
 import 'package:owner/values/passing_parameters.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import '../../core/navigation/navigation_service.dart';
@@ -49,6 +50,14 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
   @override
   void initState() {
     firstFieldController = TextEditingController();
+
+    SmsAutoFill().getAppSignature.then((signature) {
+      setState(() {
+        // appSignature = signature;
+        print("signature");
+        print(signature);
+      });
+    });
     super.initState();
   }
 
@@ -71,6 +80,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
         var code = response;
         Map<String, dynamic> otpValue = code[0];
         token = otpValue['remember_token'].toString();
+        print(token.toString() + " remember toekn.........");
         userId = otpValue['id'].toString();
         print("$token  token.........");
         print("$userId  userId.........");

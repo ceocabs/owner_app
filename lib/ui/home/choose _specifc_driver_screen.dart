@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:owner/ui/auth/login_screen.dart';
-import 'package:owner/values/extensions/double_ext.dart';
 import '../../core/navigation/navigation_service.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
+import '../../widgets/choose_specifc_driver_widget.dart';
 import '../auth/model/owner_driver_model.dart';
 import '../auth/response/owner_status_response.dart';
 import '../auth/viewModel/owner_driver_viewModel.dart';
 
-class OwnerDriverList extends StatefulWidget {
-  const OwnerDriverList({Key? key}) : super(key: key);
+class ChooseSpecifcDriverScreen extends StatefulWidget {
+  const ChooseSpecifcDriverScreen({Key? key}) : super(key: key);
 
   @override
-  _OwnerDriverListState createState() => _OwnerDriverListState();
+  State<ChooseSpecifcDriverScreen> createState() =>
+      _ChooseSpecifcDriverScreenState();
 }
 
-class _OwnerDriverListState extends State<OwnerDriverList> {
+class _ChooseSpecifcDriverScreenState extends State<ChooseSpecifcDriverScreen> {
   List<OwnerDriverModel> ownerDriverModelList = [];
 
   @override
   void initState() {
-    driverOTPVerification(ownerId: userId, context: context);
+    driverOTPVerification(ownerId: "6", context: context);
     super.initState();
   }
 
@@ -64,7 +64,7 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
         elevation: 0,
         backgroundColor: AppColor.darkBlue,
         title: Text(
-          StringConstant.addDriver,
+          StringConstant.driverList,
           style: textBold.copyWith(
             fontSize: 20,
             color: Colors.white,
@@ -88,17 +88,43 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          color: AppColor.white,
-          child: Column(
-            children: [
-              //10.h.VBox,
-              ListView.builder(
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: AppColor.white,
+        child: Column(
+          children: [
+            ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: (){
+
+                  },
+                  child: ChooseSpecifcDriverWidget(
+                    driverName:
+                        "${ownerDriverModelList[index].firstName} ${ownerDriverModelList[index].lastName}",
+                    profileImage:
+                        ownerDriverModelList[index].profileImage.toString(),
+                    balance: "",
+                    number: ownerDriverModelList[index].mobileNo.toString(),
+                    approvalStatus:
+                        ownerDriverModelList[index].approvalStatus.toString(),
+                  ),
+                );
+              },
+              padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+              shrinkWrap: true,
+              itemCount: ownerDriverModelList.length,
+              physics: const ScrollPhysics(),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Card(
                       elevation: 5,
@@ -136,13 +162,9 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      ownerDriverModelList[index]
-                                              .firstName
-                                              .toString() +
-                                          " " +
-                                          ownerDriverModelList[index]
-                                              .lastName
-                                              .toString(),
+                                      "${ownerDriverModelList[index]
+                                          .firstName} ${ownerDriverModelList[index]
+                                              .lastName}",
                                       style: textBold.copyWith(
                                         color: AppColor.darkBlue,
                                       ),
@@ -180,7 +202,7 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       StringConstant.balanceTitle,
@@ -196,72 +218,9 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
                               ],
                             ),
                             10.h.VBox,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 80.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.darkBlue,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.view,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 80.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.redColor,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.remove,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: 110.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.green,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.assignVehicle,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            10.h.VBox,
+
                           ],
                         ),
                       ),
                     ),
-                  );
-                },
-                padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                shrinkWrap: true,
-                itemCount: ownerDriverModelList.length,
-                physics: const ScrollPhysics(),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+                  )*/

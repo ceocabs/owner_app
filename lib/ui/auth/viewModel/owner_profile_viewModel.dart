@@ -7,10 +7,11 @@ import '../../../Helper/Network Manager/manager/service_api.dart';
 import '../../../core/navigation/routes.dart';
 import '../../../values/string_contsant.dart';
 import '../../../widgets/custom_info_dialog.dart';
+import '../response/owner_profile_response.dart';
 
-class OwnerDriverViewModel {
-  Future<List<dynamic>> ownerDrivers(
-      {required OwnerStatusRequestModel request,
+class ownerProfileViewModel {
+  Future<List<dynamic>> ownerProfile(
+      {required OwnerProfileRequestModel request,
         required BuildContext context}) async {
     late List<dynamic> responseObj;
 
@@ -19,16 +20,16 @@ class OwnerDriverViewModel {
 
     try {
       await client
-          .request(ServiceApi.ownrDriverList,
+          .request(ServiceApi.getOwnerInfoNew,
           data: mapReq, isAuthenticated: false)
           .then(
             (response) {
-          OwnerStatusResponseModel obj =
-          OwnerStatusResponseModel.fromJson(response.data);
-          print("${obj.message} message........");
+              OwnerProfileResponseModel obj =
+              OwnerProfileResponseModel.fromJson(response.data);
+          print("${obj.message} owner info message........");
           List<dynamic>? loginData = obj.data;
-          if (obj.success.toString() == "1") {
-           // navigator.pushNamedAndRemoveUntil(RouteName.homePage);
+         /* if (obj.success.toString() == "1") {
+            navigator.pushNamedAndRemoveUntil(RouteName.homePage);
           } else {
             showDialog(
               barrierColor: Colors.black26,
@@ -42,7 +43,8 @@ class OwnerDriverViewModel {
                 );
               },
             );
-          }
+          }*/
+
           if (loginData != null) {
             responseObj = loginData;
           }
