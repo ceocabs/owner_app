@@ -408,7 +408,7 @@ class _HomePageState extends State<HomePage> {
                       bearing: 10,
                       tilt: 10,
                     ),
-                    markers: markers,
+                    //markers: markers,
                     onTap: (position) {},
                     gestureRecognizers: Set()
                       ..add(

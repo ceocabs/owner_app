@@ -192,45 +192,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  selectedFilter == "Day"
-                                                      ? earningFilterDataModelList[
-                                                                  index]
-                                                              .interval['day']
-                                                              .toString() +
-                                                          "/" +
-                                                          earningFilterDataModelList[
-                                                                  index]
-                                                              .interval['month']
-                                                              .toString() +
-                                                          "/" +
-                                                          earningFilterDataModelList[
-                                                                  index]
-                                                              .interval['year']
-                                                              .toString()
-                                                      : selectedFilter ==
-                                                              "Month"
-                                                          ? earningFilterDataModelList[
-                                                                      index]
-                                                                  .interval[
-                                                                      'month']
-                                                                  .toString() +
-                                                              "/" +
-                                                              earningFilterDataModelList[
-                                                                      index]
-                                                                  .interval[
-                                                                      'year']
-                                                                  .toString()
-                                                          : earningFilterDataModelList[
-                                                                      index]
-                                                                  .interval[
-                                                                      'startDate']
-                                                                  .toString() +
-                                                              " - " +
-                                                              earningFilterDataModelList[
-                                                                      index]
-                                                                  .interval[
-                                                                      'endDate']
-                                                                  .toString(),
+                                                  "Date",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -247,7 +209,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  " ${earningFilterDataModelList[index].totalOnlineHrs} Hours",
+                                                  "10 Hours",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -263,7 +225,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${earningFilterDataModelList[index].totalKms} Km",
+                                                  "25 Km",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -280,10 +242,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  earningFilterDataModelList[
-                                                          index]
-                                                      .totalTrips
-                                                      .toString(),
+                                                 "1",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -299,7 +258,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "${earningFilterDataModelList[index].netEarnings} Rs",
+                                                  "100.00 Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -313,7 +272,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "${earningFilterDataModelList[index].ceoCommission} Rs",
+                                                  "25.00 Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -327,7 +286,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "${earningFilterDataModelList[index].extraCharges} Rs",
+                                                  "10.00 Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -342,7 +301,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${earningFilterDataModelList[index].totalTripAmount} Rs",
+                                                  "220.00 Rs",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -356,7 +315,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                   },
                                   physics: const ScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: earningFilterDataModelList.length,
+                                  itemCount: 10,
                                 ),
                               ),
                       ],

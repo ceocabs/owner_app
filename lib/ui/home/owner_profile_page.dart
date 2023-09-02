@@ -55,7 +55,7 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
         setState(() {
           isLoading = false;
         });
-        // print(ownerProfileModelList[0].firstName.toString() + " firstName name");
+
         if (code != null) {
         } else {}
       });
@@ -198,7 +198,10 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          ownerProfileModelList[0].profileImage.toString() != "" ||
+                                          ownerProfileModelList[0]
+                                                          .profileImage
+                                                          .toString() !=
+                                                      "" ||
                                                   // ignore: unnecessary_null_comparison
                                                   "" != null
                                               ? ClipRRect(
@@ -206,7 +209,9 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
                                                       BorderRadius.circular(
                                                           10.w),
                                                   child: Image.network(
-                                                    ownerProfileModelList[0].profileImage.toString(),
+                                                    ownerProfileModelList[0]
+                                                        .profileImage
+                                                        .toString(),
                                                     fit: BoxFit.fill,
                                                     width: 70.w,
                                                     height: 60.h,
@@ -247,19 +252,13 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
                                               Container(
                                                 width: 150.w,
                                                 child: Text(
-                                                  ownerProfileModelList[0]
-                                                          .firstName
-                                                          .toString() +
-                                                      " " +
-                                                      ownerProfileModelList[0]
-                                                          .lastName
-                                                          .toString(),
+                                                  "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}",
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  // textAlign: TextAlign.center,
                                                   style: textBold.copyWith(
-                                                      fontSize: 14.sp,
-                                                      color: AppColor.green),
+                                                    fontSize: 14.sp,
+                                                    color: AppColor.green,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -267,9 +266,10 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
                                           Row(
                                             children: [
                                               Container(
-                                                  width: 20.w,
-                                                  child: Icon(Icons.call,
-                                                      size: 16)),
+                                                width: 20.w,
+                                                child: const Icon(Icons.call,
+                                                    size: 16),
+                                              ),
                                               Text(
                                                 "  +91 " +
                                                     "${ownerProfileModelList[0].mobileNo.toString()}",
@@ -292,7 +292,8 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
 
                                               //  2.h.VBox,
                                               Text(
-                                                "  +91 " +  "${ownerProfileModelList[0].mobileNo.toString()}",
+                                                "  +91 " +
+                                                    "${ownerProfileModelList[0].mobileNo.toString()}",
                                                 style: textBold.copyWith(
                                                     color: AppColor.darkBlue,
                                                     fontSize: 14.sp),
@@ -341,6 +342,42 @@ class _OwnerProfilePageState extends State<OwnerProfilePage> {
                                               ),
                                             ],
                                           ),
+                                          20.h.VBox,
+                                          Column(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.w),
+                                                child: Image.network(
+                                                  ownerProfileModelList[0]
+                                                      .profileImage
+                                                      .toString(),
+                                                  fit: BoxFit.fill,
+                                                  width: 80.w,
+                                                  height: 70.h,
+                                                  errorBuilder: (BuildContext
+                                                          context,
+                                                      Object exception,
+                                                      StackTrace? stackTrace) {
+                                                    return Image.asset(
+                                                      Res.user,
+                                                      width: 80.w,
+                                                      height: 70.h,
+                                                      fit: BoxFit.fill,
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                              5.h.VBox,
+                                              Container(
+                                                width: 100.w,
+                                                child: Text(
+                                                  "Pan Card Front Image",
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              )
+                                            ],
+                                          )
                                         ],
                                       ),
                                     ],

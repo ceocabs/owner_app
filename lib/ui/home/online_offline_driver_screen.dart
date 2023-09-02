@@ -138,21 +138,24 @@ class _OnlineOfflineDriverScreenState extends State<OnlineOfflineDriverScreen> {
                         ),
                         child: Row(
                           children: [
-                            Image.network(
-                              onlineOfflineDriversModelList[index]
-                                  .profileImage
-                                  .toString(),
-                              width: 50.w,
-                              height: 50.h,
-                              fit: BoxFit.fill,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace? stackTrace) {
-                                return Image.asset(
-                                  Res.uploadImage,
-                                  width: 50.w,
-                                  height: 50.h,
-                                );
-                              },
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(50.w),
+                              child: Image.network(
+                                onlineOfflineDriversModelList[index]
+                                    .profileImage
+                                    .toString(),
+                                width: 60.w,
+                                height: 50.h,
+                                fit: BoxFit.fill,
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return Image.asset(
+                                    Res.uploadImage,
+                                    width: 50.w,
+                                    height: 50.h,
+                                  );
+                                },
+                              ),
                             ),
                             20.w.HBox,
                             Column(

@@ -54,6 +54,57 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     }
   }
 
+  showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.all(20.w),
+          insetPadding: EdgeInsets.all(30.w),
+          actionsPadding: EdgeInsets.all(20.w),
+          titlePadding: EdgeInsets.all(20.w),
+          buttonPadding: EdgeInsets.all(30.w),
+          title: Text(
+            StringConstant.logoutConfirmation,
+            style: textBold.copyWith(
+              color: AppColor.darkBlue,
+            ),
+          ),
+          actions: [
+            InkWell(
+              onTap: () async {
+                navigator.pop();
+                await logout(
+                  context: context,
+                  customersId: int.parse(userId),
+                );
+              },
+              child: Text(
+                StringConstant.yes,
+                style: textBold.copyWith(
+                  fontSize: 16.sp,
+                  color: AppColor.redColor,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                navigator.pop();
+              },
+              child: Text(
+                StringConstant.no,
+                style: textBold.copyWith(
+                  fontSize: 16.sp,
+                  color: AppColor.dark,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   List<OwnerProfileModel> ownerProfileModelList = [];
 
   getOwnerInfo({
@@ -96,7 +147,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     Res.transactionHistory,
     Res.withdrawHistory,
     Res.totalEarning,
-    Res.management,
+    // Res.management,
     Res.privacy,
     Res.termsAndConditions,
     Res.logout,
@@ -111,7 +162,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     StringConstant.transactionHistory,
     StringConstant.withdrawHistory,
     StringConstant.totalEarning,
-    StringConstant.vehicleAndDriverManagement,
+    // StringConstant.vehicleAndDriverManagement,
     StringConstant.privacyPolicy,
     StringConstant.termsAndConditions,
     StringConstant.logout,
@@ -133,33 +184,25 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     } else if (index == 3) {
       navigator.pushNamed(RouteName.vehicleStatusPage);
     } else if (index == 4) {
-      navigator.pushNamed(RouteName.transactionHistoryPage);
+      navigator.pushNamed(RouteName.ownerBankDetails);
     } else if (index == 5) {
-      //  navigator.pushNamed(RouteName.loginHistoryPage);
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
+        "categoryType": "transactionHistory"
+      });
     } else if (index == 6) {
-      //   navigator.pushNamed(RouteName.topUpPage);
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
+        "categoryType":"withdrawHistory"
+      });
     } else if (index == 7) {
-      //   navigator.pushNamed(RouteName.topUpPage);
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
+        "categoryType": "totalEarning"
+      });
     } else if (index == 8) {
-      navigator.pushNamed(RouteName.withdrawalRequestPage);
+      navigator.pushNamed(RouteName.privacyPolicyPage);
     } else if (index == 9) {
       navigator.pushNamed(RouteName.termsAndConditionPage);
-      //  navigator.pushNamed(RouteName.withdrawalHistoryPage);
     } else if (index == 10) {
-      navigator.pushNamed(RouteName.privacyPolicyPage);
-      // navigator.pushNamed(RouteName.referPage);
-    } else if (index == 11) {
-      await logout(context: context, customersId: int.parse(userId));
-      setState(() {});
-      // navigator.pushNamed(RouteName.insurancePage);
-    } else if (index == 12) {
-      // navigator.pushNamed(RouteName.protocolPage);
-    } else if (index == 13) {
-      // navigator.pushNamed(RouteName.complaintManagementScreen);
-    } else if (index == 14) {
-    } else if (index == 15) {
-    } else if (index == 16) {
-      //  navigator.pushNamed(RouteName.logoutPage);
+      showLogoutDialog(context);
     }
   }
 
@@ -211,7 +254,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                           shape: BoxShape.circle,
                           color: AppColor.accentColor,
                         ),
-                        child:  ClipRRect(
+                        child: ClipRRect(
                           borderRadius: BorderRadius.circular(50.w),
                           child: Image.network(
                             profileImage,

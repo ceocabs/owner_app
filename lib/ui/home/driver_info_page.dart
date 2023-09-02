@@ -1,105 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/values/extensions/double_ext.dart';
-import 'package:owner/widgets/text_form_filed.dart';
+import 'package:owner/widgets/button_widget.dart';
+
 import '../../core/navigation/navigation_service.dart';
+import '../../core/navigation/routes.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
-import '../auth/login_screen.dart';
-import '../auth/model/owner_bank_details_model.dart';
-import '../auth/response/owner_bank_details_response.dart';
-import '../auth/viewModel/owner_bank_details_viewModel.dart';
+import '../../widgets/text_form_filed.dart';
 
-class OwnerBankDetails extends StatefulWidget {
-  const OwnerBankDetails({Key? key}) : super(key: key);
+class DriverInfoPage extends StatefulWidget {
+  const DriverInfoPage({Key? key}) : super(key: key);
 
   @override
-  State<OwnerBankDetails> createState() => _OwnerBankDetailsState();
+  State<DriverInfoPage> createState() => _DriverInfoPageState();
 }
 
-class _OwnerBankDetailsState extends State<OwnerBankDetails> {
-  TextEditingController ownerNameController = TextEditingController();
-  TextEditingController ownerMobileNoController = TextEditingController();
-  TextEditingController bankHolderNameController = TextEditingController();
-  TextEditingController bankHolderMobileNoController = TextEditingController();
-  TextEditingController accountNoController = TextEditingController();
-  TextEditingController ifscCodeController = TextEditingController();
-  TextEditingController accountTypeController = TextEditingController();
-
-  List<OwnerBankDetailsModel> ownerBankDetailsModelList = [];
-  bool isLoading = false;
-
-  @override
-  Future<void> didChangeDependencies() async {
-    await ownerBankDetails(context: context, ownerId: userId);
-    super.didChangeDependencies();
-  }
-
-  ownerBankDetails({
-    required BuildContext context,
-    required String ownerId,
-  }) async {
-    final apiHandler = OwnerBankDetailsViewModel();
-
-    OwnerBankDetailsRequestModel request = OwnerBankDetailsRequestModel(
-      ownerId: ownerId,
-    );
-
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      await apiHandler
-          .ownerBankDetails(request: request, context: context)
-          .then((response) {
-        var code = response;
-
-        print("$response response............");
-        List<dynamic> driverData = response;
-        ownerBankDetailsModelList =
-            driverData.map((i) => OwnerBankDetailsModel.fromJson(i)).toList();
-        if (ownerBankDetailsModelList.isNotEmpty) {
-          ownerNameController.text =
-              ownerBankDetailsModelList[0].ownerName.toString();
-          ownerMobileNoController.text =
-              ownerBankDetailsModelList[0].ownerMobileNo.toString();
-          bankHolderNameController.text =
-              ownerBankDetailsModelList[0].holderName.toString();
-          bankHolderMobileNoController.text =
-              ownerBankDetailsModelList[0].holderMobile.toString();
-          accountNoController.text =
-              ownerBankDetailsModelList[0].accountNo.toString();
-          ifscCodeController.text =
-              ownerBankDetailsModelList[0].ifscCode.toString();
-          accountTypeController.text =
-              ownerBankDetailsModelList[0].accountType.toString();
-        }
-        setState(() {
-          isLoading = false;
-        });
-
-        setState(() {});
-
-        if (code != null) {
-        } else {}
-      });
-    } catch (e) {
-      print("$e e...........");
-    }
-  }
+class _DriverInfoPageState extends State<DriverInfoPage> {
+  TextEditingController driverNameController = TextEditingController();
+  TextEditingController driverEmailController = TextEditingController();
+  TextEditingController driverMobileNoController = TextEditingController();
+  TextEditingController driverWhatsAppNumberController =
+      TextEditingController();
+  TextEditingController driverAddressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColor.darkBlue,
         title: Text(
-          StringConstant.bankDetails,
+          StringConstant.driverDetails,
           style: textBold.copyWith(
             fontSize: 20,
             color: Colors.white,
@@ -165,15 +99,15 @@ class _OwnerBankDetailsState extends State<OwnerBankDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              StringConstant.ownerNameTitle,
+                              StringConstant.driverName,
                               style: textBold,
                             ),
                             5.h.VBox,
                             AppTextField(
-                              label: StringConstant.ownerNameTitle,
-                              hint: StringConstant.ownerNameTitle,
+                              label: StringConstant.driverName,
+                              hint: StringConstant.driverName,
                               readOnly: true,
-                              controller: ownerNameController,
+                              controller: driverNameController,
                             )
                           ],
                         ),
@@ -183,15 +117,15 @@ class _OwnerBankDetailsState extends State<OwnerBankDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              StringConstant.ownerMobileNo,
+                              StringConstant.driverEmailIdTitle,
                               style: textBold,
                             ),
                             5.h.VBox,
                             AppTextField(
-                              label: StringConstant.ownerMobileNo,
-                              hint: StringConstant.ownerMobileNo,
-                              controller: ownerMobileNoController,
+                              label: StringConstant.driverEmailIdTitle,
+                              hint: StringConstant.driverEmailIdTitle,
                               readOnly: true,
+                              controller: driverEmailController,
                             )
                           ],
                         ),
@@ -201,32 +135,15 @@ class _OwnerBankDetailsState extends State<OwnerBankDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              StringConstant.bankHolderNameTitle,
-                              style: textBold,
-                            ),
-                            AppTextField(
-                              label: StringConstant.bankHolderNameTitle,
-                              hint: StringConstant.bankHolderNameTitle,
-                              readOnly: true,
-                              controller: bankHolderNameController,
-                            )
-                          ],
-                        ),
-                        10.h.VBox,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              StringConstant.bankHolderMobileNoTitle,
+                              StringConstant.driverEmailIdTitle,
                               style: textBold,
                             ),
                             5.h.VBox,
                             AppTextField(
-                              label:  StringConstant.bankHolderMobileNoTitle,
-                              hint:  StringConstant.bankHolderMobileNoTitle,
-                              controller: bankHolderMobileNoController,
+                              label: StringConstant.driverEmailIdTitle,
+                              hint: StringConstant.driverEmailIdTitle,
                               readOnly: true,
+                              controller: driverEmailController,
                             )
                           ],
                         ),
@@ -236,32 +153,15 @@ class _OwnerBankDetailsState extends State<OwnerBankDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                             StringConstant.accountNo,
-                              style: textBold,
-                            ),
-                            AppTextField(
-                              label: StringConstant.accountNo,
-                              hint: StringConstant.accountNo,
-                              readOnly: true,
-                              controller: accountNoController,
-                            )
-                          ],
-                        ),
-                        10.h.VBox,
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              StringConstant.ifscCode,
+                              StringConstant.driverMobileNoTitle,
                               style: textBold,
                             ),
                             5.h.VBox,
                             AppTextField(
-                              label: StringConstant.ifscCode,
-                              hint: StringConstant.ifscCode,
-                              controller: ifscCodeController,
+                              label: StringConstant.driverMobileNoTitle,
+                              hint: StringConstant.driverMobileNoTitle,
                               readOnly: true,
+                              controller: driverMobileNoController,
                             )
                           ],
                         ),
@@ -271,18 +171,40 @@ class _OwnerBankDetailsState extends State<OwnerBankDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              StringConstant.accountType,
+                              StringConstant.driverWhatsappNumberTitle,
                               style: textBold,
                             ),
                             5.h.VBox,
                             AppTextField(
-                              label: StringConstant.accountType,
-                              hint: StringConstant.accountType,
+                              label: StringConstant.driverWhatsappNumberTitle,
+                              hint: StringConstant.driverWhatsappNumberTitle,
                               readOnly: true,
-                              controller: accountTypeController,
+                              controller: driverWhatsAppNumberController,
                             )
                           ],
                         ),
+                        10.h.VBox,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              StringConstant.driverAddressTitle,
+                              style: textBold,
+                            ),
+                            5.h.VBox,
+                            AppTextField(
+                              label: StringConstant.driverAddressTitle,
+                              hint: StringConstant.driverAddressTitle,
+                              readOnly: true,
+                              controller: driverAddressController,
+                            )
+                          ],
+                        ),
+                        10.h.VBox,
+                        AppButton(StringConstant.next, () {
+                          navigator.pushNamed(RouteName.driverInfoSecondPage);
+                        }, height: 40.h),
                         10.h.VBox,
                       ],
                     ),

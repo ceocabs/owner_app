@@ -14,6 +14,7 @@ class ChooseSpecifcDriverWidget extends StatefulWidget {
   String profileImage;
   String approvalStatus;
   String balance;
+  VoidCallback onTap;
 
   ChooseSpecifcDriverWidget(
       {Key? key,
@@ -21,6 +22,7 @@ class ChooseSpecifcDriverWidget extends StatefulWidget {
       required this.number,
       required this.profileImage,
       required this.approvalStatus,
+        required this.onTap,
       required this.balance})
       : super(key: key);
 
@@ -117,9 +119,7 @@ class _ChooseSpecifcDriverWidgetState extends State<ChooseSpecifcDriverWidget> {
               ),
               10.h.VBox,
               InkWell(
-                onTap: () async {
-                  await FlutterPhoneDirectCaller.callNumber(widget.number);
-                },
+                onTap: widget.onTap,
                 child: Container(
                   height: 35.h,
                   width: 300.w,
@@ -130,7 +130,7 @@ class _ChooseSpecifcDriverWidgetState extends State<ChooseSpecifcDriverWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        StringConstant.call,
+                        StringConstant.view,
                         style: textMedium.copyWith(
                           color: AppColor.white,
                         ),

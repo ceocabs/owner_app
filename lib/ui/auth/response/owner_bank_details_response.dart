@@ -1,20 +1,16 @@
 class OwnerBankDetailsRequestModel {
   late dynamic ownerId;
 
-
   OwnerBankDetailsRequestModel({
     required this.ownerId,
-
   });
 
   Map<String, dynamic> toMap() {
     return {
       'ownerId': ownerId,
-
     };
   }
 }
-
 
 class OwnerBankDetailsResponseModel {
   OwnerBankDetailsResponseModel({

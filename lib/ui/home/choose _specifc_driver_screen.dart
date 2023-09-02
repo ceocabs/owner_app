@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/navigation/navigation_service.dart';
+import '../../core/navigation/routes.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
+import '../../values/passing_parameters.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
 import '../../widgets/choose_specifc_driver_widget.dart';
@@ -20,6 +22,19 @@ class ChooseSpecifcDriverScreen extends StatefulWidget {
 
 class _ChooseSpecifcDriverScreenState extends State<ChooseSpecifcDriverScreen> {
   List<OwnerDriverModel> ownerDriverModelList = [];
+  var data;
+  String categoryType = "";
+
+  @override
+  void didChangeDependencies() {
+    data = ModalRoute.of(context)!.settings.arguments;
+    if (data != null) {
+      setState(() {
+        categoryType = data[PassingParameters.categoryType].toString();
+      });
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   void initState() {
@@ -97,10 +112,19 @@ class _ChooseSpecifcDriverScreenState extends State<ChooseSpecifcDriverScreen> {
             ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: ChooseSpecifcDriverWidget(
+                    onTap: () {
+                      if (categoryType == "transactionHistory") {
+                        navigator.pushNamed(RouteName.transactionHistoryPage);
+                      } else if (categoryType == "withdrawHistory") {
+                        navigator
+                            .pushNamed(RouteName.driverWithdrawalHistoryPage);
+                      } else if (categoryType == "totalEarning") {
+                        navigator
+                            .pushNamed(RouteName.earningFilterDataPage);
+                      }
+                    },
                     driverName:
                         "${ownerDriverModelList[index].firstName} ${ownerDriverModelList[index].lastName}",
                     profileImage:
