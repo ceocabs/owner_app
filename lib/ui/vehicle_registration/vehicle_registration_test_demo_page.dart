@@ -358,8 +358,8 @@ class _VehicleRegistrationDemoPageState
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 filled: false,
-                                contentPadding: EdgeInsets.all(14),
-                                hintText: "Select color",
+                                contentPadding: EdgeInsets.all(14.w),
+                                hintText: StringConstant.selectColorTitle,
                                 fillColor: AppColor.white,
                               ),
                               dropdownColor: AppColor.white,
@@ -368,13 +368,12 @@ class _VehicleRegistrationDemoPageState
                               onChanged: (String? newValue) {
                                 setState(() {
                                   selectedColorValue = newValue!;
-                                  // chooseState = selectedColorValue.toString();
-
-                                  print(selectedColorValue.toString() +
-                                      " selectedColorValue value........");
+                                  print(
+                                      "$selectedColorValue selectedColorValue value........");
                                   /*cityList(
                                       context: context,
                                       id: selectedStateValue.toString());*/
+                                  // chooseState = selectedColorValue.toString();
                                 });
                               },
                               items: colorMenuItems,
@@ -399,17 +398,17 @@ class _VehicleRegistrationDemoPageState
                                     color: Colors.blue,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 filled: false,
                                 contentPadding: EdgeInsets.all(14),
@@ -422,8 +421,8 @@ class _VehicleRegistrationDemoPageState
                               onChanged: (String? newValue) {
                                 setState(() {
                                   selectedBrandValue = newValue!;
-
-                                  print("$selectedBrandValue selectedColorValue value........");
+                                  print(
+                                      "$selectedBrandValue selectedColorValue value........");
                                 });
                               },
                               items: brandMenuItems,
@@ -441,7 +440,6 @@ class _VehicleRegistrationDemoPageState
                           AppTextField(
                             label: StringConstant.email,
                             hint: StringConstant.email,
-                            //  validators: emailValidator,
                             controller: emailIdController,
                             textCapitalization: TextCapitalization.none,
                             keyboardType: TextInputType.emailAddress,
@@ -458,7 +456,6 @@ class _VehicleRegistrationDemoPageState
                           AppTextField(
                             label: StringConstant.permanentAddress,
                             hint: StringConstant.permanentAddress,
-                            //  validators: addressValidator,
                             textCapitalization: TextCapitalization.characters,
                             keyboardType: TextInputType.streetAddress,
                             controller: permanentAddressController,
@@ -482,20 +479,22 @@ class _VehicleRegistrationDemoPageState
                                     color: Colors.blue,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                      color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                    color: Colors.blue,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 filled: false,
-                                contentPadding: EdgeInsets.all(14),
+                                contentPadding: EdgeInsets.all(14.w),
                                 hintText: "Select State",
                                 fillColor: AppColor.white,
                               ),
@@ -507,8 +506,8 @@ class _VehicleRegistrationDemoPageState
                                   selectedStateValue = newValue!;
                                   chooseState = selectedStateValue.toString();
 
-                                  print(selectedStateValue.toString() +
-                                      " state value........");
+                                  print(
+                                      "$selectedStateValue state value........");
                                   cityList(
                                       context: context,
                                       id: selectedStateValue.toString());
@@ -535,12 +534,12 @@ class _VehicleRegistrationDemoPageState
                                     color: Colors.blue,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: const BorderSide(
@@ -548,7 +547,7 @@ class _VehicleRegistrationDemoPageState
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 filled: false,
-                                contentPadding: EdgeInsets.all(14),
+                                contentPadding: EdgeInsets.all(14.w),
                                 hintText: "Select city",
                                 fillColor: AppColor.white,
                               ),
@@ -559,8 +558,7 @@ class _VehicleRegistrationDemoPageState
                                 setState(() {
                                   selectedValue = newValue!;
                                   chooseCity = selectedValue.toString();
-                                  print(selectedValue.toString() +
-                                      " city value.......");
+                                  print("$selectedValue city value.......");
                                 });
                               },
                               items: dropdownItems,
@@ -591,22 +589,6 @@ class _VehicleRegistrationDemoPageState
                             () {
                               if (_formKey.currentState!.validate()) {
                                 if (selectedValue != null) {
-                                  /*  navigator.pushNamed(
-                                      RouteName.driverDocumentsPage,
-                                      arguments: {
-                                        PassParameter.firstName:
-                                        firstNameController.text,
-                                        PassParameter.lastName:
-                                        lastNameController.text,
-                                        PassParameter.email:
-                                        emailIdController.text,
-                                        PassParameter.permanentAddress:
-                                        permanentAddressController.text,
-                                        PassParameter.city: chooseCity,
-                                        PassParameter.state: chooseState,
-                                        PassParameter.pinCode:
-                                        pinCodeController.text
-                                      });*/
                                 } else {
                                   AwesomeDialog(
                                     context: context,
@@ -641,3 +623,20 @@ class _VehicleRegistrationDemoPageState
     );
   }
 }
+
+/*  navigator.pushNamed(
+                                      RouteName.driverDocumentsPage,
+                                      arguments: {
+                                        PassParameter.firstName:
+                                        firstNameController.text,
+                                        PassParameter.lastName:
+                                        lastNameController.text,
+                                        PassParameter.email:
+                                        emailIdController.text,
+                                        PassParameter.permanentAddress:
+                                        permanentAddressController.text,
+                                        PassParameter.city: chooseCity,
+                                        PassParameter.state: chooseState,
+                                        PassParameter.pinCode:
+                                        pinCodeController.text
+                                      });*/

@@ -52,7 +52,7 @@ class _DriverOtpVerificationPageState extends State<DriverOtpVerificationPage> {
             driverData.map((i) => DriverInfoApprovalModel.fromJson(i)).toList();
         print(
             "${driverInfoApprovalModelList.length} driver info model length.....");
-        // print("${driverInfoApprovalModelList[0].name} driver name....");
+
         navigator.pushNamed(RouteName.driverConfirmationPage, arguments: {
           "driverName": driverInfoApprovalModelList[0].name,
           "driverId": driverInfoApprovalModelList[0].id.toString(),

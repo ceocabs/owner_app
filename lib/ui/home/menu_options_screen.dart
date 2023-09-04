@@ -124,9 +124,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
         ownerProfileModelList =
             response.map((i) => OwnerProfileModel.fromJson(i)).toList();
         print("${ownerProfileModelList.length}  length.........");
-        name = ownerProfileModelList[0].firstName.toString() +
-            " " +
-            ownerProfileModelList[0].lastName.toString();
+        name = "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}";
         mobileNo = ownerProfileModelList[0].mobileNo.toString();
         profileImage = ownerProfileModelList[0].profileImage.toString();
         email = ownerProfileModelList[0].emailId.toString();
@@ -281,7 +279,7 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                           Text(
                             name,
                             style: textBold.copyWith(
-                                fontSize: 18.sp, color: AppColor.darkBlue),
+                                fontSize: 18.sp, color: AppColor.green),
                           ),
                           //5.h.VBox,
                           Text(

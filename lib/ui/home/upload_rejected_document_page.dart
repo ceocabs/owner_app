@@ -206,9 +206,7 @@ class _UploadRejectedDocumentPageState
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 50,
+        imageQuality: 100,
       );
       if (image == null) return;
       final imageTemp = File(image.path);
@@ -265,9 +263,8 @@ class _UploadRejectedDocumentPageState
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 100,
-          maxWidth: 100);
+          imageQuality: 100,
+         );
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() {

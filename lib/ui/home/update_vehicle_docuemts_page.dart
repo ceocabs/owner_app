@@ -124,9 +124,8 @@ class _UpdateVehicleDocumentsPageState
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.gallery,
-          imageQuality: 50,
-          maxWidth: 100,
-          maxHeight: 100);
+          imageQuality: 100,
+         );
       if (image == null) return;
       final imageTemp = File(image.path);
 
@@ -173,9 +172,8 @@ class _UpdateVehicleDocumentsPageState
     try {
       final image = await ImagePicker().pickImage(
           source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 100,
-          maxWidth: 100);
+          imageQuality: 100,
+          );
       if (image == null) return;
       final imageTemp = File(
         image.path,

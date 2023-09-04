@@ -89,8 +89,10 @@ class _VehicleRegistrationThirdPageState
       File? file,
       String? folderName,
       int? index}) async {
-    var req = http.MultipartRequest('POST',
-        Uri.parse("http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
+    var req = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
     final headers = {
       'Content-Type': 'application/json',
     };
@@ -104,8 +106,8 @@ class _VehicleRegistrationThirdPageState
     var streamedResponse = await req.send();
     var response = await http.Response.fromStream(streamedResponse);
     var parsed = jsonDecode(response.body);
-    print(parsed.toString() + " image added response..........");
-    print(parsed['data'].toString() + " image url.........");
+    print("$parsed image added response..........");
+    print("${parsed['data']} image url.........");
 
     if (index == 1) {
       vehicleFrontImage = parsed['data'].toString();
@@ -199,9 +201,7 @@ class _VehicleRegistrationThirdPageState
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 50,
+        imageQuality: 100,
       );
       if (image == null) return;
       final imageTemp = File(image.path);
@@ -296,10 +296,9 @@ class _VehicleRegistrationThirdPageState
   Future pickImageFromCamara(int i) async {
     try {
       final image = await ImagePicker().pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 100,
-          maxWidth: 100);
+        source: ImageSource.camera,
+        imageQuality: 100,
+      );
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() {

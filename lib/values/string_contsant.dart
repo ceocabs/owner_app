@@ -68,6 +68,7 @@ class StringConstant {
   static const String edit = 'Edit';
   static const String camara = 'Camera';
   static const String warning = 'Warning';
+  static const String selectColorTitle = 'Select color';
   static const String selectCityHintText = 'Select city';
   static const String selectCity = 'Please select city';
   static const String selectBrand = 'Please select brand';

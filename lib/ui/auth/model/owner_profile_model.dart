@@ -5,6 +5,10 @@ class OwnerProfileModel {
   String? lastName;
   dynamic whatsAppNumber;
   dynamic mobileNo;
+  dynamic aadharCardFrontImageUrl;
+  dynamic aadharCardBackImageUrl;
+  dynamic panCardFrontImageUrl;
+
   String? emailId;
   dynamic totalVehicleCount;
 
@@ -16,6 +20,10 @@ class OwnerProfileModel {
     this.whatsAppNumber,
     this.mobileNo,
     this.emailId,
+    this.aadharCardFrontImageUrl,
+    this.aadharCardBackImageUrl,
+    this.panCardFrontImageUrl,
+
     this.totalVehicleCount,
   });
 
@@ -24,6 +32,10 @@ class OwnerProfileModel {
         id: json["id"] == null ? null : json["id"],
         firstName: json["first_name"] == null ? null : json["first_name"],
         lastName: json["last_name"] == null ? null : json["last_name"],
+        panCardFrontImageUrl: json["pancard_image"] == null ? null : json["pancard_image"],
+
+        aadharCardFrontImageUrl: json["adhaar_card_front_image"] == null ? null : json["adhaar_card_front_image"],
+        aadharCardBackImageUrl: json["adhaar_card_back_image"] == null ? null : json["adhaar_card_back_image"],
         whatsAppNumber:
             json["whatsapp_number"] == null ? null : json["whatsapp_number"],
         mobileNo: json["mobile_no"] == null ? null : json["mobile_no"],
@@ -44,5 +56,8 @@ class OwnerProfileModel {
         'email_id': emailId,
         'profile_image': profileImage,
         'totalVehicleCount': totalVehicleCount,
+        'pancard_image': panCardFrontImageUrl,
+        'adhaar_card_front_image': aadharCardFrontImageUrl,
+        'adhaar_card_back_image': aadharCardBackImageUrl,
       };
 }

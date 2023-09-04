@@ -140,9 +140,7 @@ class _VehicleRegistrationFourthScreenState
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 50,
+        imageQuality: 100,
       );
       if (image == null) return;
       final imageTemp = File(image.path);

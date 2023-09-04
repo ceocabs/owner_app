@@ -8,11 +8,10 @@ import '../../../core/navigation/navigation_service.dart';
 import '../../../core/navigation/routes.dart';
 import '../login_screen.dart';
 
-
 class LogoutViewModel {
   Future<List<dynamic>> userLogin(
       {required LogoutRequestModel request,
-        required BuildContext context}) async {
+      required BuildContext context}) async {
     late List<dynamic> responseObj;
 
     var mapReq = request.toMap();
@@ -22,26 +21,19 @@ class LogoutViewModel {
       await client
           .request(ServiceApi.logout, data: mapReq, isAuthenticated: false)
           .then(
-            (response) async {
+        (response) async {
           LogoutResponseModel obj = LogoutResponseModel.fromJson(response.data);
           print("${obj.message} message........");
           List<dynamic>? loginData = obj.data;
 
-
-          if (obj.success == "1") {
-            navigator.pushNamedAndRemoveUntil(RouteName.login, );
+          if (obj.success.toString() == "1") {
+            navigator.pushNamedAndRemoveUntil(
+              RouteName.login,
+            );
             Box loginDataBase = await Hive.openBox('database1');
-            loginDataBase.put("isLogin","");
+            loginDataBase.put("isLogin", "");
             token = "";
-          } else {
-           /* ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  obj.message.toString(),
-                ),
-              ),
-            );*/
-          }
+          } else {}
 
           if (loginData != null) {
             responseObj = loginData;

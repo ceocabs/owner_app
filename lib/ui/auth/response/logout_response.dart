@@ -23,8 +23,8 @@ class LogoutResponseModel {
     this.data,
   });
 
-  String? success;
-  String? message;
+  dynamic success;
+  dynamic message;
   dynamic data;
 
   factory LogoutResponseModel.fromJson(Map<String, dynamic> json) =>

@@ -43,7 +43,7 @@ class Helper {
     late File imageFile;
 
     XFile? pickedFile = await ImagePicker().pickImage(
-        source: source, maxHeight: 1024, maxWidth: 1024, imageQuality: 99);
+        source: source, maxHeight: 1024, maxWidth: 1024, imageQuality: 100);
 
     if (pickedFile != null) {
       print(pickedFile.path);

@@ -113,8 +113,10 @@ class _UploadRejectedVehicleDocumentState
       File? file,
       String? folderName,
       int? index}) async {
-    var req = http.MultipartRequest('POST',
-        Uri.parse("http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
+    var req = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
     final headers = {
       'Content-Type': 'application/json',
     };
@@ -224,9 +226,7 @@ class _UploadRejectedVehicleDocumentState
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 50,
+        imageQuality: 100,
       );
       if (image == null) return;
       final imageTemp = File(image.path);
@@ -369,10 +369,9 @@ class _UploadRejectedVehicleDocumentState
   Future pickImageFromCamara(int i) async {
     try {
       final image = await ImagePicker().pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 100,
-          maxWidth: 100);
+        source: ImageSource.camera,
+        imageQuality: 100,
+      );
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() {
@@ -514,8 +513,7 @@ class _UploadRejectedVehicleDocumentState
       await apiHandler
           .vehicleView(request: request, context: context)
           .then((response) async {
-        print(
-            "$response  response vehicle info response..........");
+        print("$response  response vehicle info response..........");
         List<dynamic> vehicleInfoData = response;
         vehicleInfoModelList =
             vehicleInfoData.map((i) => VehicleModel.fromJson(i)).toList();
@@ -835,7 +833,6 @@ class _UploadRejectedVehicleDocumentState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-
                       roadTaxStatus == true
                           ? UploadDocumentWidget(
                               titleName: StringConstant.roadTaxPhoto,

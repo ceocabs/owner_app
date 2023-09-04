@@ -53,7 +53,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
 
     SmsAutoFill().getAppSignature.then((signature) {
       setState(() {
-        // appSignature = signature;
+
         print("signature");
         print(signature);
       });
@@ -85,7 +85,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
         print("$token  token.........");
         print("$userId  userId.........");
         setState(() {});
-        //navigator.pushNamedAndRemoveUntil(RouteName.homePage);
+
         await checkDataApproval(
             context: context, customersId: int.parse(userId));
 
@@ -109,7 +109,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
       isLoading = true;
     });
     OwnerStatusRequestModel request =
-    OwnerStatusRequestModel(ownerId: customersId);
+        OwnerStatusRequestModel(ownerId: customersId);
 
     try {
       await apiHandler.ownerStatus(request: request, context: context).then(

@@ -217,7 +217,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 10.h.VBox,
                                 AppTextField(
-
                                   prefixIcon: SizedBox(
                                     child: CountryCodePicker(
                                       padding: const EdgeInsets.all(0),
@@ -225,7 +224,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                       flagWidth: 20.w,
                                       showFlagMain: true,
                                       enabled: false,
-
                                       onChanged: (code) {
                                         setState(() {
                                           countryCode = code.toString();
@@ -244,7 +242,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   inputFormatters: [
                                     NoLeadingSpaceFormatter(),
                                     FilteringTextInputFormatter.deny(
-                                        RegExp('[\\.|\\,|\\-\\ ]')),
+                                      RegExp('[\\.|\\,|\\-\\ ]'),
+                                    ),
                                   ],
                                   keyboardAction: TextInputAction.done,
                                   hint: StringConstant.enterYourPhone,
@@ -313,7 +312,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           deviceType: /*isPlatform*/ "Android",
                                           deviceOs: "8.1.0",
                                           deviceModel: "useDeviceModelName",
-                                          deviceId: /*deviceId*/
+                                          deviceId:
                                               "49c25710-702f-4816-adb7-311fb777c4a8",
                                           customersId: "0",
                                         );

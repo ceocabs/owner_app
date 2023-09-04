@@ -32,11 +32,7 @@ class UploadDocumentPage extends StatefulWidget {
 }
 
 class _UploadDocumentPageState extends State<UploadDocumentPage> {
-
-
-
   var data;
-
   String pinCode = "";
   String mobileNo = "";
   String firstName = "";
@@ -72,9 +68,6 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
   bool isUploaded = false;
   bool isLoading = false;
 
-
-
-
   @override
   void didChangeDependencies() {
     data = ModalRoute.of(context)!.settings.arguments;
@@ -97,7 +90,6 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     }
     super.didChangeDependencies();
   }
-
 
   driverRegistration({
     required String firstName,
@@ -126,12 +118,10 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
   }) async {
     final apiHandler = RegisterViewModel();
 
-    print(aadharCardFrontImageUrl.toString() +
-        "  aadhar card front image url........");
-    print(aadharCardBackImageUrl.toString() +
-        "  aadhar card back image url........");
-    print(panCardImageUrl.toString() + "  pan card image url........");
-    print(profileImageUrl.toString() + "  profile image url........");
+    print("$aadharCardFrontImageUrl  aadhar card front image url........");
+    print("$aadharCardBackImageUrl  aadhar card back image url........");
+    print("$panCardImageUrl  pan card image url........");
+    print("$profileImageUrl  profile image url........");
 
     RegisterRequestModel request = RegisterRequestModel(
         customersId: customersId.toString(),
@@ -181,15 +171,13 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     }
   }
 
-
-
   uploadImage(
       {required File? file,
-        required String folderName,
-        required BuildContext context}) async {
+      required String folderName,
+      required BuildContext context}) async {
     final apiHandler = uploadImageViewModel();
     DriverImageUploadRequestModel request =
-    DriverImageUploadRequestModel(file: file, folderName: folderName);
+        DriverImageUploadRequestModel(file: file, folderName: folderName);
 
     try {
       await apiHandler
@@ -205,11 +193,13 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
 
   uploadImageMethod(
       {BuildContext? context,
-        File? file,
-        String? folderName,
-        int? index}) async {
-    var req = http.MultipartRequest('POST',
-        Uri.parse("http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
+      File? file,
+      String? folderName,
+      int? index}) async {
+    var req = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
     final headers = {
       'Content-Type': 'application/json',
     };
@@ -302,9 +292,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-        maxWidth: 100,
-        maxHeight: 100,
-        imageQuality: 50,
+        imageQuality: 100,
       );
       if (image == null) return;
       final imageTemp = File(image.path);
@@ -324,7 +312,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         panCardImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: panCardImageFile,
             folderName: "test",
             index: 2);
         isPanCardImage = true;
@@ -332,7 +320,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         aadharCardFrontImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: aadharCardFrontImageFile,
             folderName: "test",
             index: 3);
         isAadharCardFrontImage = true;
@@ -340,7 +328,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         aadharCardBackImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: aadharCardBackImageFile,
             folderName: "test",
             index: 4);
         isAadharCardBackImage = true;
@@ -355,10 +343,9 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
   Future pickImageFromCamara(int i) async {
     try {
       final image = await ImagePicker().pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
-          maxHeight: 100,
-          maxWidth: 100);
+        source: ImageSource.camera,
+        imageQuality: 100,
+      );
       if (image == null) return;
       final imageTemp = File(image.path);
       setState(() {
@@ -376,7 +363,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         panCardImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: panCardImageFile,
             folderName: "test",
             index: 2);
         isPanCardImage = true;
@@ -384,7 +371,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         aadharCardFrontImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: aadharCardFrontImageFile,
             folderName: "test",
             index: 3);
         isAadharCardFrontImage = true;
@@ -392,7 +379,7 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
         aadharCardBackImageFile = imageTemp;
         await uploadImageMethod(
             context: context,
-            file: profileImageFile,
+            file: aadharCardBackImageFile,
             folderName: "test",
             index: 4);
         isAadharCardBackImage = true;
@@ -592,31 +579,32 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                                             .aadharCardBackImageValidation);
                                   } else {
                                     driverRegistration(
-                                        firstName: firstName,
-                                        lastName: lastName,
-                                        email: email,
-                                        adhaarCardNo: aadharCardNumber,
-                                        manufacture: manufacture,
-                                        panCardNo: panCardNumber,
-                                        state: state,
-                                        ram: ram,
-                                        profileType: "owner",
-                                        processor: "",
-                                        permanentAddress: permanentAddress,
-                                        mobileNo: mobileNo,
-                                        location: "Mumbai",
-                                        deviceType: "Android",
-                                        deviceOs: deviceOs,
-                                        deviceModel: "RX 20366",
-                                        deviceId: deviceId,
-                                        city: city,
-                                        pinCode: pinCode,
-                                        customersId: "",
-                                        whatsappNumber: whatsAppNumber,
-                                        aadtharCardBackImage:
-                                            aadharCardBackImageUrl,
-                                        aadtharCardFrontImage:
-                                            aadharCardFrontImageUrl);
+                                      firstName: firstName,
+                                      lastName: lastName,
+                                      email: email,
+                                      adhaarCardNo: aadharCardNumber,
+                                      manufacture: manufacture,
+                                      panCardNo: panCardNumber,
+                                      state: state,
+                                      ram: ram,
+                                      profileType: "owner",
+                                      processor: "",
+                                      permanentAddress: permanentAddress,
+                                      mobileNo: mobileNo,
+                                      location: "Mumbai",
+                                      deviceType: "Android",
+                                      deviceOs: deviceOs,
+                                      deviceModel: "RX 20366",
+                                      deviceId: deviceId,
+                                      city: city,
+                                      pinCode: pinCode,
+                                      customersId: "",
+                                      whatsappNumber: whatsAppNumber,
+                                      aadtharCardBackImage:
+                                          aadharCardBackImageUrl,
+                                      aadtharCardFrontImage:
+                                          aadharCardFrontImageUrl,
+                                    );
 
                                     setState(() {});
                                   }
@@ -635,8 +623,6 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     );
   }
 }
-
-
 
 /*  await sendMultipartRequest(
                                       firstName: firstName,

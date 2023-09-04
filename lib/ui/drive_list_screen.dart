@@ -111,80 +111,77 @@ class _DriverListScreenState extends State<DriverListScreen> {
               ),
               child: SingleChildScrollView(
                 child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 0.w,
-                      right: 0.w,
-                      top: 0.h,
-                    ),
-                    child: ListView.builder(
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: Colors.white,
-                            ),
-                            borderRadius: BorderRadius.circular(20.w),
+                  padding: EdgeInsets.only(
+                    left: 0.w,
+                    right: 0.w,
+                    top: 0.h,
+                  ),
+                  child: ListView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Colors.white,
                           ),
-                          elevation: 10,
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: 10.w,
-                                right: 10.w,
-                                top: 5.h,
-                                bottom: 10.h),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 60.w,
-                                      height: 60.h,
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: AppColor.green,
-                                      ),
-                                      child: Image.asset(Res.user),
+                          borderRadius: BorderRadius.circular(20.w),
+                        ),
+                        elevation: 10,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 10.w, right: 10.w, top: 5.h, bottom: 10.h),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 60.w,
+                                    height: 60.h,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColor.green,
                                     ),
-                                    10.w.HBox,
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "${driverListModelList[index].firstName} ${driverListModelList[index].lastName}   ",
-                                          style: textBold.copyWith(
-                                              color: AppColor.darkBlue,
-                                              fontSize: 16.sp),
-                                        ),
-                                        Text(
-                                          "Mobile Number : +91 ${driverListModelList[index].mobileNo}",
-                                          style: textBold.copyWith(
-                                              color: AppColor.dark,
-                                              fontSize: 14.sp),
-                                        ),
-                                        Text(
-                                          "Driver Id : ${driverListModelList[index].id}",
-                                          style: textBold.copyWith(
-                                              color: AppColor.dark,
-                                              fontSize: 14.sp),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                                    child: Image.asset(Res.user),
+                                  ),
+                                  10.w.HBox,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "${driverListModelList[index].firstName} ${driverListModelList[index].lastName}   ",
+                                        style: textBold.copyWith(
+                                            color: AppColor.darkBlue,
+                                            fontSize: 16.sp),
+                                      ),
+                                      Text(
+                                        "Mobile Number : +91 ${driverListModelList[index].mobileNo}",
+                                        style: textBold.copyWith(
+                                            color: AppColor.dark,
+                                            fontSize: 14.sp),
+                                      ),
+                                      Text(
+                                        "Driver Id : ${driverListModelList[index].id}",
+                                        style: textBold.copyWith(
+                                            color: AppColor.dark,
+                                            fontSize: 14.sp),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                      physics: const ScrollPhysics(),
-                      itemCount: driverListModelList.length,
-                      shrinkWrap: true,
-                    )),
+                        ),
+                      );
+                    },
+                    physics: const ScrollPhysics(),
+                    itemCount: driverListModelList.length,
+                    shrinkWrap: true,
+                  ),
+                ),
               ),
             ),
           ],
@@ -193,5 +190,3 @@ class _DriverListScreenState extends State<DriverListScreen> {
     );
   }
 }
-
-

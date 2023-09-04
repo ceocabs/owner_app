@@ -239,6 +239,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: vehicleNumberController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -256,6 +257,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: colorTextEditingController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -273,6 +275,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: brandNameTextEditingController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -289,6 +292,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: vehicleNameController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -302,7 +306,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 label: StringConstant.ccCapacity,
                                 hint: StringConstant.ccCapacity,
                                 validators: cityValidator,
-                                readOnly: false,
+                                readOnly: true,
                                 maxLength: 10,
                                 keyboardType: TextInputType.number,
                                 controller: ccCapacityController,
@@ -327,6 +331,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: registerYearEditingController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -342,6 +347,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: acAvailableEditingController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -354,7 +360,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 label: StringConstant.runningKm,
                                 hint: StringConstant.runningKm,
                                 controller: runningKmController,
-                                readOnly: false,
+                                readOnly: true,
                                 maxLength: 7,
                                 keyboardType: TextInputType.number,
                                 validators: pinCodeValidator,
@@ -379,6 +385,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 keyboardType: TextInputType.text,
                                 controller: fuelTypeEditingController,
                                 maxLength: 20,
+                                readOnly: true,
                               ),
                               10.h.VBox,
                               Text(
@@ -501,8 +508,9 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                               Text(
                                 StringConstant.roadTaxExpiry,
                                 style: textRegular.copyWith(
-                                    color: AppColor.darkBlue,
-                                    fontWeight: FontWeight.w500),
+                                  color: AppColor.darkBlue,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               AppTextField(
                                 label: StringConstant.roadTaxExpiry,
