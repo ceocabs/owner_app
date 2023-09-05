@@ -45,7 +45,7 @@ class _OnlineOfflineDriverScreenState extends State<OnlineOfflineDriverScreen> {
     final apiHandler = OnlineOfflineDriversViewModel();
     OnlineOfflineDriversRequestModel request =
         OnlineOfflineDriversRequestModel(ownerId: ownerId, status: status);
-    //  VehicleApprovalStatusModel request = VehicleApprovalStatusModel();
+
     try {
       await apiHandler
           .onlineOfflineDriver(context: context, request: request)

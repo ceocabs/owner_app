@@ -36,7 +36,9 @@ class _ComplaintHistoryWidgetState extends State<ComplaintHistoryWidget> {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: AppColor.white),
+        borderRadius: BorderRadius.circular(10.w),
+        color: AppColor.white,
+      ),
       child: Column(
         children: [
           Padding(
@@ -69,7 +71,10 @@ class _ComplaintHistoryWidgetState extends State<ComplaintHistoryWidget> {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: 12.w, right: 12.w),
+              padding: EdgeInsets.only(
+                left: 12.w,
+                right: 12.w,
+              ),
               child: Text(
                 "CRN NO : ${widget.crnNumber}",
                 style: textRegular.copyWith(
@@ -83,7 +88,10 @@ class _ComplaintHistoryWidgetState extends State<ComplaintHistoryWidget> {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.only(left: 12.w, right: 12.w),
+              padding: EdgeInsets.only(
+                left: 12.w,
+                right: 12.w,
+              ),
               child: Text(
                 StringConstant.bookingReleatedIssues,
                 style: textRegular.copyWith(
@@ -115,7 +123,7 @@ class _ComplaintHistoryWidgetState extends State<ComplaintHistoryWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Status :",
+                    StringConstant.statusTitle1,
                     style: textRegular.copyWith(
                         fontSize: 12.sp, color: AppColor.dark),
                   ),
@@ -131,7 +139,7 @@ class _ComplaintHistoryWidgetState extends State<ComplaintHistoryWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Contact Id :",
+                    StringConstant.contactId,
                     style: textRegular.copyWith(
                         fontSize: 12.sp, color: AppColor.dark),
                   ),

@@ -3,12 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/values/extensions/double_ext.dart';
 import 'package:owner/widgets/button_widget.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
-
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
-
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
 

@@ -153,7 +153,7 @@ class _EditVehicleSecondPageState extends State<EditVehicleSecondPage> {
                       side: const BorderSide(
                         color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(20.w),
                     ),
                     elevation: 10,
                     child: Padding(
@@ -207,7 +207,7 @@ class _EditVehicleSecondPageState extends State<EditVehicleSecondPage> {
                           ),
                           10.h.VBox,
                           Text(
-                            "PUC Expiry",
+                            StringConstant.pucExpiry,
                             style: textRegular.copyWith(
                               fontWeight: FontWeight.w500,
                               color: AppColor.darkBlue,
@@ -349,14 +349,19 @@ class _EditVehicleSecondPageState extends State<EditVehicleSecondPage> {
                             inputFormatters: [NoLeadingSpaceFormatter()],
                           ),
                           10.h.VBox,
-                          AppButton(StringConstant.next, () {
-                            if (isEdit == true) {
-                              setState(() {
-                                isEdit = false;
-                              });
-                            }
-                            navigator.pushNamed(RouteName.editVehicleThirdPage);
-                          }, height: 41.h),
+                          AppButton(
+                            StringConstant.next,
+                            () {
+                              if (isEdit == true) {
+                                setState(() {
+                                  isEdit = false;
+                                });
+                              }
+                              navigator
+                                  .pushNamed(RouteName.editVehicleThirdPage);
+                            },
+                            height: 41.h,
+                          ),
                           20.h.VBox,
                         ],
                       ),

@@ -102,8 +102,9 @@ class _AssignVehiclePageState extends State<AssignVehiclePage> {
                               padding: EdgeInsets.only(left: 20.w),
                               child: Text(
                                 StringConstant.alreadyAssignVehicle,
-                                style:
-                                    textBold.copyWith(color: AppColor.redColor),
+                                style: textBold.copyWith(
+                                  color: AppColor.redColor,
+                                ),
                               ),
                             ),
                             Container(

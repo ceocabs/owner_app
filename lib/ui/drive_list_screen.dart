@@ -128,7 +128,11 @@ class _DriverListScreenState extends State<DriverListScreen> {
                         elevation: 10,
                         child: Container(
                           padding: EdgeInsets.only(
-                              left: 10.w, right: 10.w, top: 5.h, bottom: 10.h),
+                            left: 10.w,
+                            right: 10.w,
+                            top: 5.h,
+                            bottom: 10.h,
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,

@@ -80,7 +80,7 @@ class _OTPVerificationPageState extends State<OTPVerificationPage> {
         var code = response;
         Map<String, dynamic> otpValue = code[0];
         token = otpValue['remember_token'].toString();
-        print(token.toString() + " remember toekn.........");
+        print("$token remember toekn.........");
         userId = otpValue['id'].toString();
         print("$token  token.........");
         print("$userId  userId.........");

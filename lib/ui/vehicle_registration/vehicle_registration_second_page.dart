@@ -443,12 +443,16 @@ class _VehicleRegistrationSecondPageState
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                      color: Colors.blue, width: 1),
+                                    color: Colors.blue,
+                                    width: 1,
+                                  ),
                                   borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                      color: Colors.blue, width: 1),
+                                    color: Colors.blue,
+                                    width: 1,
+                                  ),
                                   borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 border: OutlineInputBorder(

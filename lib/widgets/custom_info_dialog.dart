@@ -18,8 +18,6 @@ class CustomInfoDialog extends StatefulWidget {
   State<CustomInfoDialog> createState() => _CustomInfoDialogState();
 }
 
-// call with harshad
-
 class _CustomInfoDialogState extends State<CustomInfoDialog> {
   @override
   Widget build(BuildContext context) {

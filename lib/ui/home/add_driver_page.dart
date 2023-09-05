@@ -39,7 +39,10 @@ class _AddDriverPageState extends State<AddDriverPage> {
         backgroundColor: AppColor.darkBlue,
         title: Text(
           StringConstant.addDriver,
-          style: textBold.copyWith(fontSize: 20, color: Colors.white),
+          style: textBold.copyWith(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         leading: Column(

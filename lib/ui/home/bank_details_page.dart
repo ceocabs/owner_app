@@ -94,8 +94,9 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
       context: context,
       builder: (context) {
         return Dialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.w),
+          ),
           elevation: 16,
           child: Container(
             height: 100.h,
@@ -145,7 +146,6 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
     try {
       final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
-
         imageQuality: 100,
       );
       if (image == null) return;
@@ -161,9 +161,9 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
   Future pickImageFromCamara() async {
     try {
       final image = await ImagePicker().pickImage(
-          source: ImageSource.camera,
-          imageQuality: 100,
-         );
+        source: ImageSource.camera,
+        imageQuality: 100,
+      );
       if (image == null) return;
       final imageTemp = File(image.path);
       cancelChequeFile = imageTemp;
@@ -309,8 +309,9 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
                           Text(
                             StringConstant.ifscCode,
                             style: textRegular.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: AppColor.darkBlue),
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.darkBlue,
+                            ),
                           ),
                           5.h.VBox,
                           AppTextField(

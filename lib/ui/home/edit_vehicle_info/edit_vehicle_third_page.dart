@@ -97,22 +97,13 @@ class _EditVehicleThirdPageState extends State<EditVehicleThirdPage> {
 
   void checkValidation() {
     if (vehicleFrontImage == "" || vehicleFrontImage == null) {
-      // showMessage("Please upload vehicle front image");
     } else if (vehicleBackImage == "" || vehicleBackImage == null) {
-      // showMessage("Please upload vehicle back image");
     } else if (vehicleRightImage == "" || vehicleRightImage == null) {
-      //  showMessage("Please upload vehicle right image");
     } else if (vehicleLeftImage == "" || vehicleLeftImage == "") {
-      //  showMessage("Please upload vehicle left image");
     } else if (rcFrontImage == "" || rcFrontImage == null) {
-      // showMessage("Please upload rc front image");
     } else if (rcBackImage == "" || rcBackImage == "") {
-      // showMessage("Please upload rc back image");
     } else if (insuranceImage == "" || insuranceImage == "") {
-      // showMessage("Please upload insurance image");
-    } else if (fitnessImage == "" || fitnessImage == "") {
-      // showMessage("Please upload fitness image");
-    }
+    } else if (fitnessImage == "" || fitnessImage == "") {}
   }
 
   @override
@@ -345,16 +336,3 @@ class _EditVehicleThirdPageState extends State<EditVehicleThirdPage> {
     );
   }
 }
-
-/*  Future pickImageFromGallery() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-
-      setState(() => this.image = imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }*/
-//ziance

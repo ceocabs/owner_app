@@ -9,6 +9,11 @@ class StringConstant {
   static const String connect = 'Connect';
   static const String profile = 'Profile';
   static const String call = 'Call';
+  static const String licenceFrontImageTitle = 'Licence Front Image';
+  static const String licenceBackImageTitle = 'Licence Back Image';
+  static const String panCardFrontImageTitle = 'Pan Card Front Image';
+  static const String statusTitle1 = 'Status :';
+  static const String contactId = 'Contact Id :';
   static const String statusTitle = 'Status: ';
   static const String ownerNameTitle = 'Owner Name';
   static const String vehicleAssignTitle = 'Vehicle Assign - Un-Assign List';
@@ -81,8 +86,14 @@ class StringConstant {
   static const String refer = 'Refer';
   static const String gallery = 'Gallery';
   static const String remove = 'Remove';
+  static const String month = 'Month';
+  static const String week = 'Week';
+  static const String day = 'Day';
   static const String kmTitle = 'Km : ';
   static const String beforeAmount = 'Before Amount';
+  static const String locationDenied = 'Location permissions are permanently denied, we cannot request permissions.';
+  static const String disableLocationService = 'Location services are disabled.';
+  static const String deniedLocation = 'Location permissions are denied';
   static const String afterAmount = 'After Amount';
   static const String balanceTitle = 'Balance : ';
   static const String writeYourMessage = 'Write your Message here';
@@ -353,6 +364,7 @@ class StringConstant {
   static const String profileImage = 'Profile Image';
   static const String loginHours = 'Login Hours';
   static const String withdrawal = 'Withdrawal';
+  static const String dateTitle = 'Date : ';
   static const String notification = 'Notification';
   static const String totalEarning = 'Total Earning';
   static const String vehicleAndDriverManagement =

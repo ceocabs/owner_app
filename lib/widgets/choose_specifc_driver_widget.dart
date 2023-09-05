@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/values/extensions/double_ext.dart';
 import 'package:owner/values/string_contsant.dart';
-
 import '../res.dart';
 import '../values/colors.dart';
 import '../values/style.dart';
@@ -22,7 +20,7 @@ class ChooseSpecifcDriverWidget extends StatefulWidget {
       required this.number,
       required this.profileImage,
       required this.approvalStatus,
-        required this.onTap,
+      required this.onTap,
       required this.balance})
       : super(key: key);
 
@@ -111,7 +109,9 @@ class _ChooseSpecifcDriverWidgetState extends State<ChooseSpecifcDriverWidget> {
                       ),
                       Text(
                         "${widget.balance} Rs.",
-                        style: textBold.copyWith(color: AppColor.green),
+                        style: textBold.copyWith(
+                          color: AppColor.green,
+                        ),
                       ),
                     ],
                   ),

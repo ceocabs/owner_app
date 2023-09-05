@@ -6,6 +6,7 @@ import 'package:owner/ui/auth/viewModel/logout_viewModel.dart';
 import 'package:owner/ui/auth/otp_verification_page.dart';
 import 'package:owner/ui/home/home_page.dart';
 import 'package:owner/values/extensions/double_ext.dart';
+import 'package:owner/values/passing_parameters.dart';
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
 import '../../res.dart';
@@ -124,7 +125,8 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
         ownerProfileModelList =
             response.map((i) => OwnerProfileModel.fromJson(i)).toList();
         print("${ownerProfileModelList.length}  length.........");
-        name = "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}";
+        name =
+            "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}";
         mobileNo = ownerProfileModelList[0].mobileNo.toString();
         profileImage = ownerProfileModelList[0].profileImage.toString();
         email = ownerProfileModelList[0].emailId.toString();
@@ -184,17 +186,14 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
     } else if (index == 4) {
       navigator.pushNamed(RouteName.ownerBankDetails);
     } else if (index == 5) {
-      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
-        "categoryType": "transactionHistory"
-      });
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,
+          arguments: {PassingParameters.categoryType: "transactionHistory"});
     } else if (index == 6) {
-      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
-        "categoryType":"withdrawHistory"
-      });
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,
+          arguments: {PassingParameters.categoryType: "withdrawHistory"});
     } else if (index == 7) {
-      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,arguments: {
-        "categoryType": "totalEarning"
-      });
+      navigator.pushNamed(RouteName.chooseSpecifcDriverScreen,
+          arguments: {PassingParameters.categoryType: "totalEarning"});
     } else if (index == 8) {
       navigator.pushNamed(RouteName.privacyPolicyPage);
     } else if (index == 9) {
@@ -290,7 +289,9 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                           Text(
                             email,
                             style: textBold.copyWith(
-                                fontSize: 14.sp, color: AppColor.dark),
+                              fontSize: 14.sp,
+                              color: AppColor.dark,
+                            ),
                           ),
                         ],
                       ),
@@ -303,7 +304,6 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          // navigator.pushNamed(RouteName.addDriverPage);
                           navigator.pushNamed(RouteName.searchDriverPage);
                         },
                         child: Container(
@@ -329,9 +329,9 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
                           navigator.pushNamed(
                             RouteName.vehicleRegistrationFirstPage,
                             arguments: {
-                              "isEdit": "false",
-                              "vehicleId": "",
-                              "vehicleNumber": ""
+                              PassingParameters.isEdit: "false",
+                              PassingParameters.vehicleId: "",
+                              PassingParameters.vehicleNumber: ""
                             },
                           );
                         },
@@ -434,59 +434,4 @@ class _MenuOptionsScreenState extends State<MenuOptionsScreen> {
   }
 }
 
-/*Container(
-          height: double.infinity,
-          color: AppColor.white,
-          child: Container(
-            child: GridView.builder(
-              itemCount: menuOptionList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 4.0,
-                mainAxisSpacing: 8.0,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    navigationFun(index);
-                  },
-                  child: Container(
-                    height: 110.h,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(60),
-                          child: Container(
-                            height: 60.h,
-                            width: 70.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: AppColor.greyColor.withOpacity(0.5),
-                            ),
-                            child: const Icon(Icons.account_balance_wallet),
-                          ),
-                        ),
-                        5.h.VBox,
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 70.w,
-                            child: Text(
-                              menuOptionList[index],
-                              style: textBold,
-                              textAlign: TextAlign.center,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),*/
+

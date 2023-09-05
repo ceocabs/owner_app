@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/values/extensions/double_ext.dart';
+import 'package:owner/values/passing_parameters.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
@@ -145,9 +146,9 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
             onTap: () {
               navigator.pushNamed(RouteName.vehicleRegistrationFirstPage,
                   arguments: {
-                    "isEdit": "true",
-                    "vehicleId": vehicleId,
-                    "vehicleNumber": vehicleNumberController.text,
+                    PassingParameters.isEdit: "true",
+                    PassingParameters.vehicleId: vehicleId,
+                    PassingParameters.vehicleNumber: vehicleNumberController.text,
                   });
             },
             child: Padding(
@@ -539,7 +540,7 @@ class _VehicleInfoFirstPageState extends State<VehicleInfoFirstPage> {
                                 () {
                                   navigator.pushNamed(
                                       RouteName.vehicleInfoSecondPage,
-                                      arguments: {"vehicleId": vehicleId});
+                                      arguments: {PassingParameters.vehicleId: vehicleId});
                                 },
                                 height: 41.h,
                               ),

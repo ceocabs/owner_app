@@ -120,7 +120,10 @@ class _EditVehicleFourthPageState extends State<EditVehicleFourthPage> {
         backgroundColor: AppColor.darkBlue,
         title: Text(
           StringConstant.uploadDocument,
-          style: textBold.copyWith(fontSize: 20, color: Colors.white),
+          style: textBold.copyWith(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         leading: Column(

@@ -8,6 +8,9 @@ import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
 import '../../widgets/driver_images_widget.dart';
+import '../auth/model/driver_profile_model.dart';
+import '../auth/response/driver_profile_response.dart';
+import '../auth/viewModel/driver_profile_viewModel.dart';
 
 class DriverInfoSecondPage extends StatefulWidget {
   const DriverInfoSecondPage({Key? key}) : super(key: key);
@@ -17,6 +20,70 @@ class DriverInfoSecondPage extends StatefulWidget {
 }
 
 class _DriverInfoSecondPageState extends State<DriverInfoSecondPage> {
+  String driverId = "";
+  String? licenceFrontImageUrl = "";
+  String? licenceBackImageUrl = "";
+  String? panCardFrontImageUrl = "";
+  String? profileImageUrl = "";
+  String? adharCardFrontImageUrl = "";
+  String? adharCardBackImageUrl = "";
+  List<DriverProfileModel> driverProfileModelList = [];
+  var data;
+
+  @override
+  void didChangeDependencies() {
+    data = ModalRoute.of(context)!.settings.arguments;
+    if (data != null) {
+      setState(() {
+        driverId = data["driverId"].toString();
+      });
+      driverInfo(ownerId: driverId, context: context);
+    }
+    super.didChangeDependencies();
+  }
+
+
+
+  driverInfo({
+    required BuildContext context,
+    required String ownerId,
+  }) async {
+    final apiHandler = DriverProfileViewModel();
+
+    DriverProfileRequestModel request = DriverProfileRequestModel(
+      userId: ownerId,
+    );
+
+    try {
+      await apiHandler
+          .driverProfile(request: request, context: context)
+          .then((response) {
+        var code = response;
+
+        print("$response response............");
+        List<dynamic> driverData = response;
+        driverProfileModelList =
+            driverData.map((i) => DriverProfileModel.fromJson(i)).toList();
+        setState(() {});
+        licenceFrontImageUrl =
+            driverProfileModelList[0].drivingLicenseFrontImage;
+        licenceBackImageUrl = driverProfileModelList[0].drivingLicenceBackImage;
+        panCardFrontImageUrl = driverProfileModelList[0].panCardImage;
+        profileImageUrl = driverProfileModelList[0].profileImage;
+        adharCardFrontImageUrl = driverProfileModelList[0].adharCardFrontImage;
+        adharCardBackImageUrl = driverProfileModelList[0].adharCardBackImage;
+        print("$profileImageUrl profile image url......");
+
+        if (code != null) {
+        } else {}
+      });
+    } catch (e) {
+      print("$e e...........");
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,14 +128,12 @@ class _DriverInfoSecondPageState extends State<DriverInfoSecondPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DriverImagesWidget(
-                  profileImage:
-                      "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Licence Front Image",
+                  profileImage: licenceFrontImageUrl,
+                  titleName: StringConstant.licenceFrontImageTitle,
                 ),
                 DriverImagesWidget(
-                  profileImage:
-                      "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Licence Back Image",
+                  profileImage: licenceBackImageUrl,
+                  titleName: StringConstant.licenceBackImageTitle,
                 ),
               ],
             ),
@@ -77,14 +142,12 @@ class _DriverInfoSecondPageState extends State<DriverInfoSecondPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DriverImagesWidget(
-                  profileImage:
-                  "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Pan Card Front Image",
+                  profileImage: panCardFrontImageUrl,
+                  titleName: StringConstant.panCardFrontImageTitle,
                 ),
                 DriverImagesWidget(
-                  profileImage:
-                  "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Pan Card Back Image",
+                  profileImage: profileImageUrl,
+                  titleName: StringConstant.profileImage,
                 ),
               ],
             ),
@@ -93,14 +156,12 @@ class _DriverInfoSecondPageState extends State<DriverInfoSecondPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DriverImagesWidget(
-                  profileImage:
-                  "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Aadhar Card Front Image",
+                  profileImage: adharCardFrontImageUrl,
+                  titleName: StringConstant.aadtharCardFrontImage,
                 ),
                 DriverImagesWidget(
-                  profileImage:
-                  "https://images.unsplash.com/photo-1542382257-80dedb725088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80",
-                  titleName: "Aadhar Card Back Image",
+                  profileImage: adharCardBackImageUrl,
+                  titleName: StringConstant.aadtharCardBackImage,
                 ),
               ],
             )

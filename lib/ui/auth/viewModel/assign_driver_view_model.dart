@@ -57,9 +57,9 @@ class AssignDriverViewModel {
         (response) {
           ResendOtpResponseModel obj =
               ResendOtpResponseModel.fromJson(response.data);
-          print("${obj.message} message........");
+
           List<dynamic>? loginData = obj.data;
-          if (obj.success == "1") {
+          if (obj.success.toString() == "1") {
           } else {}
 
           if (loginData != null) {
@@ -68,7 +68,10 @@ class AssignDriverViewModel {
         },
       );
     } catch (e) {
-      throw APIException(e.toString(), statusCode: ErrorCode.api.index);
+      throw APIException(
+        e.toString(),
+        statusCode: ErrorCode.api.index,
+      );
     }
     return responseObj;
   }

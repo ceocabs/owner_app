@@ -41,7 +41,10 @@ class _DriverPersonaInfoPageState extends State<DriverPersonaInfoPage> {
         backgroundColor: AppColor.darkBlue,
         title: Text(
           StringConstant.driverDetails,
-          style: textBold.copyWith(fontSize: 20, color: Colors.white),
+          style: textBold.copyWith(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         leading: Column(
@@ -85,7 +88,6 @@ class _DriverPersonaInfoPageState extends State<DriverPersonaInfoPage> {
             Form(
               key: _formKey,
               child: Container(
-                //   height: 520.h,
                 padding: EdgeInsets.only(
                   left: 20.w,
                   right: 20.w,

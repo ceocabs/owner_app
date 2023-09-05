@@ -483,7 +483,7 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
           .then((response) {
         var code = response;
         colorModelList = response.map((i) => ColorModel.fromJson(i)).toList();
-        print(colorModelList.length.toString() + "  length.........");
+        print("${colorModelList.length}  length.........");
 
         if (code != null) {
           for (int i = 0; i < colorModelList.length; i++) {
@@ -765,15 +765,17 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                                 inputFormatters: [
                                   NoLeadingSpaceFormatter(),
                                   FilteringTextInputFormatter.deny(
-                                      RegExp('[\\.|\\,|\\-\\ ]')),
+                                    RegExp('[\\.|\\,|\\-\\ ]'),
+                                  ),
                                 ],
                               ),
                               10.h.VBox,
                               Text(
                                 StringConstant.registerYear,
                                 style: textRegular.copyWith(
-                                    color: AppColor.darkBlue,
-                                    fontWeight: FontWeight.w500),
+                                  color: AppColor.darkBlue,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               SizedBox(
                                 height: 41.h,
@@ -840,7 +842,9 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                                     ),
                                     border: OutlineInputBorder(
                                       borderSide: const BorderSide(
-                                          color: Colors.blue, width: 1),
+                                        color: Colors.blue,
+                                        width: 1,
+                                      ),
                                       borderRadius: BorderRadius.circular(10.w),
                                     ),
                                     filled: false,
@@ -877,7 +881,8 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
                                 inputFormatters: [
                                   NoLeadingSpaceFormatter(),
                                   FilteringTextInputFormatter.deny(
-                                      RegExp('[\\.|\\,|\\-\\ ]')),
+                                    RegExp('[\\.|\\,|\\-\\ ]'),
+                                  ),
                                 ],
                               ),
                               10.h.VBox,
@@ -1025,32 +1030,3 @@ class _VehicleRegistrationPageState extends State<VehicleRegistrationPage> {
     );
   }
 }
-
-/* navigator.pushNamed(
-                                      RouteName.vehicleRegistrationSecondPage,
-                                      arguments: {
-                                        PassingParameters.vehicleNumber:
-                                            vehicleNumberController.text,
-                                        PassingParameters.vehicleType:
-                                            selectedVehicleTypeValue,
-                                        PassingParameters.color:
-                                            selectedColorValue,
-                                        PassingParameters.brandName:
-                                            selectedBrandValue,
-                                        PassingParameters.vehicleName:
-                                            selectedVehicleNameValue,
-                                        PassingParameters.ccCapacity:
-                                            ccCapacityController.text,
-                                        PassingParameters.registerYear:
-                                            selectedRegisterYearValue,
-                                        PassingParameters.acAvailable:
-                                            selectedAcValue,
-                                        PassingParameters.runningKm:
-                                            runningKmController.text,
-                                        PassingParameters.fuelType:
-                                            selectedFuelValue,
-                                        PassingParameters.carrier:
-                                            selectedcarrierValue,
-                                        PassingParameters.pucExpiry:
-                                            pucExpiryController.text
-                                      });*/

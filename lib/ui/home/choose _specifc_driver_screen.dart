@@ -122,7 +122,7 @@ class _ChooseSpecifcDriverScreenState extends State<ChooseSpecifcDriverScreen> {
                             .pushNamed(RouteName.driverWithdrawalHistoryPage);
                       } else if (categoryType == "totalEarning") {
                         navigator
-                            .pushNamed(RouteName.earningFilterDataPage);
+                            .pushNamed(RouteName.earningFilterDataPage,arguments: {"driverId":ownerDriverModelList[index].id.toString()});
                       }
                     },
                     driverName:
@@ -148,103 +148,4 @@ class _ChooseSpecifcDriverScreenState extends State<ChooseSpecifcDriverScreen> {
   }
 }
 
-/*Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      elevation: 5,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.only(
-                          left: 20.w,
-                          right: 20.w,
-                        ),
-                        child: Column(
-                          children: [
-                            10.h.VBox,
-                            Row(
-                              children: [
-                                Image.network(
-                                  ownerDriverModelList[index]
-                                      .profileImage
-                                      .toString(),
-                                  width: 40.h,
-                                  height: 40.h,
-                                  fit: BoxFit.fill,
-                                  errorBuilder: (BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace) {
-                                    return Image.asset(
-                                      Res.user,
-                                      width: 40.h,
-                                      height: 40.h,
-                                    );
-                                  },
-                                ),
-                                10.w.HBox,
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "${ownerDriverModelList[index]
-                                          .firstName} ${ownerDriverModelList[index]
-                                              .lastName}",
-                                      style: textBold.copyWith(
-                                        color: AppColor.darkBlue,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Number : +91 ${ownerDriverModelList[index].mobileNo}",
-                                      style: textBold.copyWith(
-                                        color: AppColor.darkBlue,
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      StringConstant.statusTitle,
-                                      style: textBold,
-                                    ),
-                                    Text(
-                                      ownerDriverModelList[index]
-                                          .approvalStatus
-                                          .toString(),
-                                      style: textBold.copyWith(
-                                          color: AppColor.green),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      StringConstant.balanceTitle,
-                                      style: textBold,
-                                    ),
-                                    Text(
-                                      " Rs.",
-                                      style: textBold.copyWith(
-                                          color: AppColor.green),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            10.h.VBox,
 
-                          ],
-                        ),
-                      ),
-                    ),
-                  )*/

@@ -14,6 +14,8 @@ class PassingParameters {
   static const String userType = 'userType';
   static const String vehicleId = 'vehicleId';
   static const String isEdit = 'isEdit';
+  static const String driverId = 'driverId';
+  static const String searchingType = 'searchingType';
   static const String categoryType = 'categoryType';
 
   static const String vehicleNumber = 'vehicleNumber';

@@ -11,6 +11,7 @@ import 'package:owner/ui/auth/model/owner_profile_model.dart';
 import 'package:owner/ui/auth/response/get_color_response.dart';
 import 'package:owner/ui/auth/model/vehhicle_details_model.dart';
 import 'package:owner/values/extensions/double_ext.dart';
+import 'package:owner/values/passing_parameters.dart';
 import 'package:owner/values/string_contsant.dart';
 import 'dart:ui' as ui;
 import '../../core/navigation/navigation_service.dart';
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   late LatLng latLong1 = const LatLng(21.48583611, 39.1925852100);
   late LatLng latLong2 = const LatLng(21.485820131, 39.19353010);
   late LatLng latLong3 = const LatLng(21.5858554, 39.1825967854);
-
+  bool isLoading = false;
   String isAdharStatus = "";
   String isPanStatus = "";
   String isLicenseStatus = "";
@@ -50,6 +51,7 @@ class _HomePageState extends State<HomePage> {
   List<ColorModel> colorModelList = [];
   List<BrandModel> brandModelList = [];
   List<VehicleDetailsModel> vehicleDetailsModelList = [];
+  List<OwnerProfileModel> ownerProfileModelList = [];
 
   Set<Marker> markers = {};
   final Set<Polyline> _polyline = {};
@@ -62,18 +64,18 @@ class _HomePageState extends State<HomePage> {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       await Geolocator.openLocationSettings();
-      return Future.error('Location services are disabled.');
+      return Future.error(StringConstant.disableLocationService);
     }
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        return Future.error(StringConstant.deniedLocation);
       }
     }
     if (permission == LocationPermission.deniedForever) {
       return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.',
+        StringConstant.locationDenied,
       );
     }
     return await Geolocator.getCurrentPosition(
@@ -92,8 +94,6 @@ class _HomePageState extends State<HomePage> {
         .buffer
         .asUint8List();
   }
-
-  bool isLoading = false;
 
   @override
   Future<void> didChangeDependencies() async {
@@ -129,8 +129,7 @@ class _HomePageState extends State<HomePage> {
         // await getAddressOnTap(currentClientOrderLatLong);
       },
     );
-    print(currentClientOrderLatLong.toString() +
-        "  updated location.........controller");
+    print("$currentClientOrderLatLong  updated location.........controller");
   }
 
   getUserInfo({
@@ -155,8 +154,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  List<OwnerProfileModel> ownerProfileModelList = [];
-
   getOwnerInfo({
     required BuildContext context,
     required String userId,
@@ -175,9 +172,8 @@ class _HomePageState extends State<HomePage> {
             response.map((i) => OwnerProfileModel.fromJson(i)).toList();
         print("${ownerProfileModelList.length}  length.........");
 
-        name = ownerProfileModelList[0].firstName.toString() +
-            " " +
-            ownerProfileModelList[0].lastName.toString();
+        name =
+            "${ownerProfileModelList[0].firstName} ${ownerProfileModelList[0].lastName}";
         mobileNo = ownerProfileModelList[0].mobileNo.toString();
         profileImage = ownerProfileModelList[0].profileImage.toString();
         email = ownerProfileModelList[0].emailId.toString();
@@ -229,11 +225,6 @@ class _HomePageState extends State<HomePage> {
         vehicleDetailsModelList =
             response.map((i) => VehicleDetailsModel.fromJson(i)).toList();
         print("${vehicleDetailsModelList.length}  length.........");
-        /* print(
-            "${vehicleDetailsModelList[0].insuranceCompany} insurance company name");
-        print(
-            "${vehicleDetailsModelList[1].insuranceCompany} insurance company name");*/
-
         if (code != null) {
         } else {}
       });
@@ -252,8 +243,6 @@ class _HomePageState extends State<HomePage> {
         var code = response;
         brandModelList = response.map((i) => BrandModel.fromJson(i)).toList();
         print("${brandModelList.length}  length.........");
-        //print(brandModelList[0].brandName.toString() + " brand name");
-
         if (code != null) {
         } else {}
       });
@@ -434,7 +423,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           navigator.pushNamed(
                               RouteName.onlineOfflineDriverScreen,
-                              arguments: {"searchingType": "Online"});
+                              arguments: {PassingParameters.searchingType: "Online"});
                         },
                         child: Container(
                           height: 41.h,
@@ -449,8 +438,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 StringConstant.onlineDrivers,
-                                style:
-                                    textBold.copyWith(color: AppColor.white),
+                                style: textBold.copyWith(color: AppColor.white),
                               ),
                             ],
                           ),
@@ -460,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {
                           navigator.pushNamed(
                               RouteName.onlineOfflineDriverScreen,
-                              arguments: {"searchingType": "Offline"});
+                              arguments: {PassingParameters.searchingType: "Offline"});
                         },
                         child: Container(
                           height: 41.h,
@@ -498,36 +486,4 @@ String profileImage = "";
 String email = "";
 String latitude = "";
 String longnitude = "";
-/*  getVehicleType({
-    required BuildContext context,
-  }) async {
-    final apiHandler = getVehicleTypeViewModel();
-    // GetVehicleTypeRequestModel request = GetVehicleTypeRequestModel(token: token);
-    try {
-      await apiHandler
-          .getVehicleType(
-        context: context,
-      )
-          .then((response) {
-        var code = response;
-        print(response.toString() + "  response........");
-          List<VehicleInfo>? vehicleList = [];
 
-           vehicleList = response.cast<VehicleModel>();
-           print(vehicleList.length.toString() + " vehicle list length....");
-           print(vehicleList[0].vehicleTypeId.toString() + "   id........");
-
-     */ /*   List<VehicleModel> obj =
-            UserInfoResponseModel.fromJson(response as Map<String, dynamic>);
-        print(obj.data.toString() + " data in main files.................");
-        List<dynamic>? userData = obj.data;
-     */ /*  */ /* if (userData != null) {
-          // responseObj = userData;
-        }*/ /*
-        if (code != null) {
-        } else {}
-      });
-    } catch (e) {
-      print(e.toString() + " e...........");
-    }
-  }*/

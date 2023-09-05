@@ -93,8 +93,10 @@ class _VehicleRegistrationFourthScreenState
       File? file,
       String? folderName,
       int? index}) async {
-    var req = http.MultipartRequest('POST',
-        Uri.parse("http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
+    var req = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            "http://ceocabsnode-env.eba-8wh7cacx.ap-south-1.elasticbeanstalk.com:8005/public/api/upload-image"));
     final headers = {
       'Content-Type': 'application/json',
     };
@@ -177,7 +179,11 @@ class _VehicleRegistrationFourthScreenState
       } else if (i == 4) {
         permitFile = imageTemp;
         await uploadImageMethod(
-            context: context, file: permitFile, folderName: "test", index: 4);
+          context: context,
+          file: permitFile,
+          folderName: "test",
+          index: 4,
+        );
         isPermitPic = true;
       } else if (i == 5) {
         pucCertificateFile = imageTemp;
@@ -190,7 +196,11 @@ class _VehicleRegistrationFourthScreenState
       } else if (i == 6) {
         roadTaxFile = imageTemp;
         await uploadImageMethod(
-            context: context, file: roadTaxFile, folderName: "test", index: 6);
+          context: context,
+          file: roadTaxFile,
+          folderName: "test",
+          index: 6,
+        );
         isRoadTaxPic = true;
       }
 
@@ -224,7 +234,9 @@ class _VehicleRegistrationFourthScreenState
                   child: Text(
                     StringConstant.gallery,
                     style: textBold.copyWith(
-                        fontSize: 20.sp, color: AppColor.darkBlue),
+                      fontSize: 20.sp,
+                      color: AppColor.darkBlue,
+                    ),
                   ),
                 ),
                 10.h.VBox,
@@ -280,28 +292,38 @@ class _VehicleRegistrationFourthScreenState
       } else if (i == 3) {
         authorisationFile = imageTemp;
         await uploadImageMethod(
-            context: context,
-            file: authorisationFile,
-            folderName: "test",
-            index: 3);
+          context: context,
+          file: authorisationFile,
+          folderName: "test",
+          index: 3,
+        );
         isAuthorisationPic = true;
       } else if (i == 4) {
         permitFile = imageTemp;
         await uploadImageMethod(
-            context: context, file: permitFile, folderName: "test", index: 4);
+          context: context,
+          file: permitFile,
+          folderName: "test",
+          index: 4,
+        );
         isPermitPic = true;
       } else if (i == 5) {
         pucCertificateFile = imageTemp;
         await uploadImageMethod(
-            context: context,
-            file: pucCertificateFile,
-            folderName: "test",
-            index: 5);
+          context: context,
+          file: pucCertificateFile,
+          folderName: "test",
+          index: 5,
+        );
         isPucCertificatePic = true;
       } else if (i == 6) {
         roadTaxFile = imageTemp;
         await uploadImageMethod(
-            context: context, file: roadTaxFile, folderName: "test", index: 6);
+          context: context,
+          file: roadTaxFile,
+          folderName: "test",
+          index: 6,
+        );
         isRoadTaxPic = true;
       }
 
@@ -868,35 +890,3 @@ class _VehicleRegistrationFourthScreenState
     );
   }
 }
-
-/*
-
-      var parsed = jsonDecode(response.body);
-      LoginResponseModel userModel = LoginResponseModel.fromJson(parsed);
-      print(userModel.message.toString() + " data..........");
-      print(userModel.data.toString() + " data..........");
-
-      if (userModel.success.toString() == "1") {
-        navigator.pushNamedAndRemoveUntil(RouteName.vehicleRegisterSuccess);
-      }
-    } catch (e) {
-      print(e.toString() + " error of api.........");
-    }
-
-*/ /*
-    var parsed = jsonDecode(response.body);
-    LoginResponseModel userModel = LoginResponseModel.fromJson(parsed);
-    Map<String, dynamic> otpDataValue = userModel.data[0];
-    String otpValue = otpDataValue['otp'].toString();*/ /*
-
-    setState(() {});
-
-    */ /*navigator.pushNamedAndRemoveUntil(RouteName.otpVerification, arguments: {
-      'type': "Register",
-      "otp": otpValue,
-      "mobileNumber": mobileNo
-    });*/ /*
-    setState(() {
-      isLoading = false;
-    });
-  }*/

@@ -61,7 +61,11 @@ enum ServiceApi {
   ownrDriverList,
   getOwnerInfoNew,
   onlineOfflineOwnerDrivers,
-  ownerBankDetailsById
+  ownerBankDetailsById,
+  getdriverinfo,
+  driverEaningDetails,
+  unAssignDriver,
+  setDriverCurrentAssignedVehicle
 }
 
 extension ServiceExtension on ServiceApi {
@@ -183,9 +187,20 @@ extension ServiceExtension on ServiceApi {
       case ServiceApi.getOwnerInfoNew:
         return "public/api/getownerinfonew";
 
-
       case ServiceApi.onlineOfflineOwnerDrivers:
         return "online-offline-owner-drivers";
+
+      case ServiceApi.getdriverinfo:
+        return "public/api/getdriverinfo";
+
+      case ServiceApi.unAssignDriver:
+        return "public/api/unassigndriver";
+
+      case ServiceApi.driverEaningDetails:
+        return "payment/driver-earnings-details";
+
+      case ServiceApi.setDriverCurrentAssignedVehicle:
+        return "set-driver-current-assigned-vehicle";
     }
   }
 

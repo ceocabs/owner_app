@@ -345,17 +345,17 @@ class _VehicleRegistrationDemoPageState
                                     color: Colors.blue,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                       color: Colors.blue, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.w),
                                 ),
                                 filled: false,
                                 contentPadding: EdgeInsets.all(14.w),

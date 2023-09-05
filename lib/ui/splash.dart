@@ -24,6 +24,16 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+
+
+
+  bool isLogin = false;
+  String isAdharStatus = "";
+  String isPanStatus = "";
+  String isProfileStatus = "";
+  String isApprovalStatus = "";
+  bool isDocumentRejected = false;
+
   @override
   void initState() {
     super.initState();
@@ -57,11 +67,7 @@ class _SplashState extends State<Splash> {
     );
   }
 
-  String isAdharStatus = "";
-  String isPanStatus = "";
-  String isProfileStatus = "";
-  String isApprovalStatus = "";
-  bool isDocumentRejected = false;
+
 
   checkDataApproval({
     required BuildContext context,
@@ -119,7 +125,7 @@ class _SplashState extends State<Splash> {
     }
   }
 
-  bool isLogin = false;
+
 
   checkLogin() async {
     Box loginDataBase = await Hive.openBox('database1');

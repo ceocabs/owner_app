@@ -157,12 +157,12 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
           .then((response) {
         var code = response;
         Map<String, dynamic> otpValue = code[0];
-        navigator.pushNamedAndRemoveUntil(RouteName.otpVerificationPage,
-            arguments: {
-              "type": "Login",
-              "otp": otpValue['otp'].toString(),
-              "mobileNumber": mobileNo
-            });
+        navigator
+            .pushNamedAndRemoveUntil(RouteName.otpVerificationPage, arguments: {
+          PassingParameters.type: "Login",
+          PassingParameters.otp: otpValue['otp'].toString(),
+          PassingParameters.mobileNumber: mobileNo
+        });
         if (code != null) {
         } else {}
       });
@@ -448,10 +448,10 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                     ripplesCount: 6,
                     duration: const Duration(milliseconds: 6 * 300),
                     child: Container(
-                      child: Image.asset(Res.logo),
                       width: 100.w,
                       height: 100.h,
                       decoration: const BoxDecoration(shape: BoxShape.circle),
+                      child: Image.asset(Res.logo),
                     ),
                   )
                 ],
@@ -565,50 +565,58 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
                                   ],
                                 ),
                                 20.h.VBox,
-                                AppButton(StringConstant.submit, () async {
-                                  if (isProfileImage == false) {
-                                    showSnackBar(context,
-                                        StringConstant.profileImageValidation);
-                                  } else if (isPanCardImage == false) {
-                                    showSnackBar(context,
-                                        StringConstant.panCardImageValidation);
-                                  } else if (isAadharCardBackImage == false) {
-                                    showSnackBar(
-                                        context,
-                                        StringConstant
-                                            .aadharCardBackImageValidation);
-                                  } else {
-                                    driverRegistration(
-                                      firstName: firstName,
-                                      lastName: lastName,
-                                      email: email,
-                                      adhaarCardNo: aadharCardNumber,
-                                      manufacture: manufacture,
-                                      panCardNo: panCardNumber,
-                                      state: state,
-                                      ram: ram,
-                                      profileType: "owner",
-                                      processor: "",
-                                      permanentAddress: permanentAddress,
-                                      mobileNo: mobileNo,
-                                      location: "Mumbai",
-                                      deviceType: "Android",
-                                      deviceOs: deviceOs,
-                                      deviceModel: "RX 20366",
-                                      deviceId: deviceId,
-                                      city: city,
-                                      pinCode: pinCode,
-                                      customersId: "",
-                                      whatsappNumber: whatsAppNumber,
-                                      aadtharCardBackImage:
-                                          aadharCardBackImageUrl,
-                                      aadtharCardFrontImage:
-                                          aadharCardFrontImageUrl,
-                                    );
+                                AppButton(
+                                  StringConstant.submit,
+                                  () async {
+                                    if (isProfileImage == false) {
+                                      showSnackBar(
+                                          context,
+                                          StringConstant
+                                              .profileImageValidation);
+                                    } else if (isPanCardImage == false) {
+                                      showSnackBar(
+                                          context,
+                                          StringConstant
+                                              .panCardImageValidation);
+                                    } else if (isAadharCardBackImage == false) {
+                                      showSnackBar(
+                                          context,
+                                          StringConstant
+                                              .aadharCardBackImageValidation);
+                                    } else {
+                                      driverRegistration(
+                                        firstName: firstName,
+                                        lastName: lastName,
+                                        email: email,
+                                        adhaarCardNo: aadharCardNumber,
+                                        manufacture: manufacture,
+                                        panCardNo: panCardNumber,
+                                        state: state,
+                                        ram: ram,
+                                        profileType: "owner",
+                                        processor: "",
+                                        permanentAddress: permanentAddress,
+                                        mobileNo: mobileNo,
+                                        location: "Mumbai",
+                                        deviceType: "Android",
+                                        deviceOs: deviceOs,
+                                        deviceModel: "RX 20366",
+                                        deviceId: deviceId,
+                                        city: city,
+                                        pinCode: pinCode,
+                                        customersId: "",
+                                        whatsappNumber: whatsAppNumber,
+                                        aadtharCardBackImage:
+                                            aadharCardBackImageUrl,
+                                        aadtharCardFrontImage:
+                                            aadharCardFrontImageUrl,
+                                      );
 
-                                    setState(() {});
-                                  }
-                                }, height: 41.h),
+                                      setState(() {});
+                                    }
+                                  },
+                                  height: 41.h,
+                                ),
                                 30.h.VBox
                               ],
                             ),
@@ -623,28 +631,3 @@ class _UploadDocumentPageState extends State<UploadDocumentPage> {
     );
   }
 }
-
-/*  await sendMultipartRequest(
-                                      firstName: firstName,
-                                      lastName: lastName,
-                                      state: state,
-                                      profileType: "Driver",
-                                      pinCode: pinCode,
-                                      permanentAddress: permanentAddress,
-                                      location: "",
-                                      city: city,
-                                      deviceId: "ED123",
-                                      deviceModel: "asdas",
-                                      deviceOs: "12asd",
-                                      deviceType: "Android",
-                                      processor: "sadsa",
-                                      ram: "2gb",
-                                      whatsappNumber: whatsAppNumber,
-                                      email: email,
-                                      customersId: "0",
-                                      adhaarCardNo: aadharCardNumber,
-                                      emailId: email,
-                                      manufacture: "OnePlus",
-                                      mobileNo: mobileNo,
-                                      pancardNo: panCardNumber,
-                                    );*/

@@ -219,7 +219,9 @@ class _ExpandableHistoryWidgetState extends State<ExpandableHistoryWidget> {
                     child: Text(
                       "${widget.beforeAmountPrice} Rs",
                       style: textBold.copyWith(
-                          color: AppColor.darkBlue, fontSize: 12.sp),
+                        color: AppColor.darkBlue,
+                        fontSize: 12.sp,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/ui/auth/login_screen.dart';
 import 'package:owner/values/extensions/double_ext.dart';
+import 'package:owner/values/passing_parameters.dart';
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
 import '../../res.dart';
 import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
+import '../../widgets/owner_driver_info_widget.dart';
 import '../auth/model/owner_driver_model.dart';
 import '../auth/response/owner_status_response.dart';
 import '../auth/viewModel/owner_driver_viewModel.dart';
@@ -25,11 +27,11 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
 
   @override
   void initState() {
-    driverOTPVerification(ownerId: userId, context: context);
+    driverList(ownerId: userId, context: context);
     super.initState();
   }
 
-  driverOTPVerification({
+  driverList({
     required BuildContext context,
     required String ownerId,
   }) async {
@@ -38,7 +40,6 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
     OwnerStatusRequestModel request = OwnerStatusRequestModel(
       ownerId: ownerId,
     );
-
     try {
       await apiHandler
           .ownerDrivers(request: request, context: context)
@@ -96,192 +97,47 @@ class _OwnerDriverListState extends State<OwnerDriverList> {
         color: AppColor.white,
         child: Column(
           children: [
-            //10.h.VBox,
             ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 5,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        right: 20.w,
+                return OwnerDriverInfoWidget(
+                  driverName:
+                      "${ownerDriverModelList[index].firstName} ${ownerDriverModelList[index].lastName}",
+                  balance: "",
+                  status: ownerDriverModelList[index].approvalStatus.toString(),
+                  imageUrl: ownerDriverModelList[index].profileImage.toString(),
+                  driverMobileNumber: "${ownerDriverModelList[index].mobileNo}",
+                  onTapView: () {
+                    navigator.pushNamed(RouteName.driverInfoPage, arguments: {
+                      PassingParameters.driverId:
+                          ownerDriverModelList[index].id.toString()
+                    });
+                  },
+                  onTapRemove: () {
+                    AwesomeDialog(
+                      context: context,
+                      dialogType: DialogType.warning,
+                      headerAnimationLoop: true,
+                      animType: AnimType.topSlide,
+                      showCloseIcon: false,
+                      title: StringConstant.remove,
+                      desc: StringConstant.removeDriverConfirmation,
+                      descTextStyle: textBold.copyWith(
+                        fontSize: 20.sp,
+                        color: AppColor.dark,
                       ),
-                      child: Column(
-                        children: [
-                          10.h.VBox,
-                          Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(40.w),
-                                child: Image.network(
-                                  ownerDriverModelList[index]
-                                      .profileImage
-                                      .toString(),
-                                  width: 40.h,
-                                  height: 40.h,
-                                  fit: BoxFit.fill,
-                                  errorBuilder: (BuildContext context,
-                                      Object exception, StackTrace? stackTrace) {
-                                    return Image.asset(
-                                      Res.user,
-                                      width: 40.h,
-                                      height: 40.h,
-                                    );
-                                  },
-                                ),
-                              ),
-                              10.w.HBox,
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "${ownerDriverModelList[index].firstName} ${ownerDriverModelList[index].lastName}",
-                                    style: textBold.copyWith(
-                                      color: AppColor.darkBlue,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Number : +91 ${ownerDriverModelList[index].mobileNo}",
-                                    style: textBold.copyWith(
-                                      color: AppColor.darkBlue,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    StringConstant.statusTitle,
-                                    style: textBold,
-                                  ),
-                                  Text(
-                                    ownerDriverModelList[index]
-                                        .approvalStatus
-                                        .toString(),
-                                    style: textBold.copyWith(
-                                        color: AppColor.green),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    StringConstant.balanceTitle,
-                                    style: textBold,
-                                  ),
-                                  Text(
-                                    " Rs.",
-                                    style: textBold.copyWith(
-                                        color: AppColor.green),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                          10.h.VBox,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  navigator.pushNamed(RouteName.driverInfoPage);
-                                },
-                                child: Container(
-                                  width: 80.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.darkBlue,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.view,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  AwesomeDialog(
-                                    context: context,
-                                    dialogType: DialogType.warning,
-                                    headerAnimationLoop: true,
-                                    animType: AnimType.topSlide,
-                                    showCloseIcon: false,
-                                    title: StringConstant.remove,
-                                    desc:
-                                        StringConstant.removeDriverConfirmation,
-                                    descTextStyle: textBold.copyWith(
-                                      fontSize: 20.sp,
-                                      color: AppColor.dark,
-                                    ),
-                                    btnCancelOnPress: () {},
-                                    btnOkOnPress: () {},
-                                  ).show();
-                                },
-                                child: Container(
-                                  width: 80.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.redColor,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.remove,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  navigator.pushNamed(
-                                      RouteName.ownerAssignVehiclePage);
-                                },
-                                child: Container(
-                                  width: 110.w,
-                                  height: 30.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColor.green,
-                                    borderRadius: BorderRadius.circular(5.w),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      StringConstant.assignVehicle,
-                                      style: textBold.copyWith(
-                                          color: AppColor.white),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          10.h.VBox,
-                        ],
-                      ),
-                    ),
-                  ),
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {},
+                    ).show();
+                  },
+                  onTapAssignVehicle: () {
+                    navigator.pushNamed(RouteName.ownerAssignVehiclePage);
+                  },
                 );
               },
-              padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+              padding: EdgeInsets.only(
+                top: 10.h,
+                bottom: 10.h,
+              ),
               shrinkWrap: true,
               itemCount: ownerDriverModelList.length,
               physics: const ScrollPhysics(),

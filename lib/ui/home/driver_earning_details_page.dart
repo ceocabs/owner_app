@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:owner/values/extensions/double_ext.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
-
 import '../../core/navigation/navigation_service.dart';
 import '../../core/navigation/routes.dart';
 import '../../res.dart';
@@ -174,7 +173,7 @@ class _DriverEarningDetailsPageState extends State<DriverEarningDetailsPage> {
                             MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "GST and Gov. Charges",
+                                StringConstant.gstChargeTitle,
                                 style: textRegular.copyWith(
                                     fontSize: 12.sp,
                                     color: AppColor.grey,

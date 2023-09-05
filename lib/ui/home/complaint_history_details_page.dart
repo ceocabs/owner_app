@@ -73,8 +73,11 @@ class _ComplaintHistoryDetailsPageState
               ),
             ),
             Container(
-              //  height: 520.h,
-              padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                top: 20.h,
+              ),
               child: SingleChildScrollView(
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -111,7 +114,7 @@ class _ComplaintHistoryDetailsPageState
                           ),
                         );
                       },
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: 5,
                     ),

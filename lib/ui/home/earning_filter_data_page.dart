@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:owner/ui/auth/login_screen.dart';
+import 'package:owner/ui/auth/model/driver_earning_model.dart';
 import 'package:owner/values/extensions/double_ext.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:proste_bezier_curve/utils/type/index.dart';
@@ -10,6 +12,8 @@ import '../../values/colors.dart';
 import '../../values/string_contsant.dart';
 import '../../values/style.dart';
 import '../auth/model/earning_filter_data_model.dart';
+import '../auth/response/driver_earning_response.dart';
+import '../auth/viewModel/driver_earning_viewModel.dart';
 
 class EarningFilterDataPage extends StatefulWidget {
   const EarningFilterDataPage({Key? key}) : super(key: key);
@@ -21,7 +25,54 @@ class EarningFilterDataPage extends StatefulWidget {
 class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
   bool isLoading = false;
   String selectedFilter = "Day";
-  List<EarningFilterDataModel> earningFilterDataModelList = [];
+  String driverId = "";
+  List<DriverEarningModel> earningFilterDataModelList = [];
+  var data;
+
+  driverEarningFilter(
+      {required dynamic userId,
+      required String filter,
+      required BuildContext context}) async {
+    final apiHandler = DriverEarningViewModel();
+    DriverEarningRequestModel request =
+        DriverEarningRequestModel(uId: userId, interval: filter);
+    setState(() {
+      isLoading = true;
+    });
+    earningFilterDataModelList.clear();
+    try {
+      await apiHandler
+          .driverEarning(request: request, context: context)
+          .then((response) async {
+        List<dynamic> filterData = response['driverEarnings'];
+
+        earningFilterDataModelList =
+            filterData.map((i) => DriverEarningModel.fromJson(i)).toList();
+        setState(() {
+          isLoading = false;
+        });
+        print("$response driver eaning daily earning filter data.......");
+        setState(() {});
+      });
+    } catch (e) {
+      print("$e e....payment 1");
+    }
+  }
+
+
+
+  @override
+  Future<void> didChangeDependencies() async {
+    data = ModalRoute.of(context)!.settings.arguments;
+    if (data != null) {
+      setState(() {
+        driverId = data["driverId"].toString();
+      });
+    }
+    await driverEarningFilter(
+        context: context, filter: "daily", userId: driverId.toString());
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,12 +161,19 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  selectedFilter = "Day";
+                                  await driverEarningFilter(
+                                      context: context,
+                                      filter: "daily",
+                                      userId: driverId.toString());
+                                  setState(() {});
+                                },
                                 child: Container(
                                   width: 80.w,
                                   child: Center(
                                     child: Text(
-                                      "Day",
+                                      StringConstant.day,
                                       style: textSemiBold.copyWith(
                                           color: selectedFilter == "Day"
                                               ? AppColor.green
@@ -125,12 +183,19 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  selectedFilter = "Week";
+                                  await driverEarningFilter(
+                                      context: context,
+                                      filter: "weekly",
+                                      userId: driverId.toString());
+                                  setState(() {});
+                                },
                                 child: Container(
                                   width: 80.w,
                                   child: Center(
                                     child: Text(
-                                      "Week",
+                                      StringConstant.week,
                                       style: textSemiBold.copyWith(
                                           color: selectedFilter == "Week"
                                               ? AppColor.green
@@ -140,12 +205,19 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  selectedFilter = "Month";
+                                  await driverEarningFilter(
+                                      context: context,
+                                      filter: "monthly",
+                                      userId: driverId.toString());
+                                  setState(() {});
+                                },
                                 child: Container(
                                   width: 80.w,
                                   child: Center(
                                     child: Text(
-                                      "Month",
+                                      StringConstant.month,
                                       style: textSemiBold.copyWith(
                                           color: selectedFilter == "Month"
                                               ? AppColor.green
@@ -173,7 +245,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                         padding: EdgeInsets.all(10.w),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(10.w),
                                           color: AppColor.grey.withOpacity(0.3),
                                         ),
                                         height: 155.h,
@@ -186,13 +258,18 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Date : ",
+                                                  StringConstant.dateTitle,
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.darkBlue,
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Date",
+                                                  selectedFilter == "Day"
+                                                      ? "${earningFilterDataModelList[index].interval['day']}/${earningFilterDataModelList[index].interval['month']}/${earningFilterDataModelList[index].interval['year']}"
+                                                      : selectedFilter ==
+                                                              "Month"
+                                                          ? "${earningFilterDataModelList[index].interval['month']}/${earningFilterDataModelList[index].interval['year']}"
+                                                          : "${earningFilterDataModelList[index].interval['startDate']} - ${earningFilterDataModelList[index].interval['endDate']}",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -209,7 +286,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "10 Hours",
+                                                  " ${earningFilterDataModelList[index].totalOnlineHours} Hours",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -225,7 +302,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "25 Km",
+                                                  "${earningFilterDataModelList[index].totalKms} Km",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -242,7 +319,10 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                 "1",
+                                                  earningFilterDataModelList[
+                                                          index]
+                                                      .totalTrips
+                                                      .toString(),
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -258,7 +338,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "100.00 Rs",
+                                                  "${earningFilterDataModelList[index].netEarnings} Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -267,12 +347,13 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  StringConstant.ceoChargesTitle,
+                                                  StringConstant
+                                                      .ceoChargesTitle,
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "25.00 Rs",
+                                                  "${earningFilterDataModelList[index].ceoCommission} Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -286,7 +367,7 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                                       color: AppColor.darkBlue),
                                                 ),
                                                 Text(
-                                                  "10.00 Rs",
+                                                  "${earningFilterDataModelList[index].extraCharges} Rs",
                                                   style: textSemiBold.copyWith(
                                                       color: AppColor.green),
                                                 ),
@@ -295,13 +376,14 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  StringConstant.tripAmountTitle,
+                                                  StringConstant
+                                                      .tripAmountTitle,
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.darkBlue,
                                                   ),
                                                 ),
                                                 Text(
-                                                  "220.00 Rs",
+                                                  "${earningFilterDataModelList[index].totalTripAmount} Rs",
                                                   style: textSemiBold.copyWith(
                                                     color: AppColor.green,
                                                   ),
@@ -313,9 +395,9 @@ class _EarningFilterDataPageState extends State<EarningFilterDataPage> {
                                       ),
                                     );
                                   },
-                                  physics: const ScrollPhysics(),
+                                  physics: ScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: 10,
+                                  itemCount: earningFilterDataModelList.length,
                                 ),
                               ),
                       ],

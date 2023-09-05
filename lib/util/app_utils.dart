@@ -1,13 +1,12 @@
 import 'package:another_flushbar/flushbar.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../core/navigation/navigation_service.dart';
 import '../../values/colors.dart';
 import '../../values/style.dart';
 
 enum MessageType { INFO, ERROR, WARNING }
+
 bool isAndroid = true;
 Flushbar? _flushBar;
 
@@ -45,7 +44,10 @@ showSnackBar(BuildContext context, String message) {
     SnackBar(
       content: Text(
         message,
-        style: textRegular.copyWith(fontSize: 14.sp, color: AppColor.white),
+        style: textRegular.copyWith(
+          fontSize: 14.sp,
+          color: AppColor.white,
+        ),
       ),
       duration: Duration(seconds: 1),
     ),

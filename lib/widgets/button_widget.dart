@@ -32,14 +32,16 @@ class AppButton extends StatelessWidget {
       child: MaterialButton(
         elevation: this.elevation,
         onPressed: callback,
+        color: buttonColor ?? AppColor.darkBlue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius ?? 10),
+          ),
+        ),
         child: Text(
           label,
           style: textMedium.copyWith(
               color: labelColor ?? AppColor.white, fontSize: 16.sp),
-        ),
-        color: buttonColor ?? AppColor.darkBlue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(radius ?? 10)),
         ),
       ),
     );
